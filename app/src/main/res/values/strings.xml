@@ -54,7 +54,7 @@
     <string-array name="module_titles">
         <item>DASHBOARD</item>
         <item>DEBT</item>
-        <item>BUDGET</item>
+        <item>INCOME</item>
         <item>EXPENSES</item>
         <item>MORE</item>
     </string-array>
