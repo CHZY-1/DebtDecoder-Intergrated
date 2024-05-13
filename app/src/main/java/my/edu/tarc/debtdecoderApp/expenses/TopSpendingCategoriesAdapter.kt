@@ -1,13 +1,13 @@
-package com.example.expenses_and_budget_mobileassignment.expenses
+package my.edu.tarc.debtdecoderApp.expenses
 
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.expenses_and_budget_mobileassignment.data.ExpenseCategory
-import com.example.expenses_and_budget_mobileassignment.data.ExpenseTopCategoryItem
+import my.edu.tarc.debtdecoderApp.data.ExpenseCategory
+import my.edu.tarc.debtdecoderApp.data.ExpenseTopCategoryItem
 import com.example.expenses_and_budget_mobileassignment.util.ExpenseCategoryManager
-import com.example.expenses_and_budget_mobileassignment.util.GlideImageLoader
+import my.edu.tarc.debtdecoderApp.util.GlideImageLoader
 import my.edu.tarc.debtdecoder.databinding.ItemSumExpenseTopCategoryBinding
 
 class TopSpendingCategoriesAdapter(

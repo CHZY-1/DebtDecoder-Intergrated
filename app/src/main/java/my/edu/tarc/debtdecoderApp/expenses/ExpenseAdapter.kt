@@ -1,13 +1,13 @@
-package com.example.expenses_and_budget_mobileassignment.expenses
+package my.edu.tarc.debtdecoderApp.expenses
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.expenses_and_budget_mobileassignment.data.Expense
-import com.example.expenses_and_budget_mobileassignment.data.ExpenseCategory
+import my.edu.tarc.debtdecoderApp.data.Expense
+import my.edu.tarc.debtdecoderApp.data.ExpenseCategory
 import com.example.expenses_and_budget_mobileassignment.util.ExpenseCategoryManager
-import com.example.expenses_and_budget_mobileassignment.util.GlideImageLoader
+import my.edu.tarc.debtdecoderApp.util.GlideImageLoader
 import my.edu.tarc.debtdecoder.databinding.ItemExpenseBinding
 
 class ExpenseAdapter(private var expenses: List<Expense>, private val imageLoader: GlideImageLoader) : RecyclerView.Adapter<ExpenseAdapter.ExpenseViewHolder>() {

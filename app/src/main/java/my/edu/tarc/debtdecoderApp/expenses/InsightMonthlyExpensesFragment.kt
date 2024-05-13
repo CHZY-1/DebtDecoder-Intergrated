@@ -1,4 +1,4 @@
-package com.example.expenses_and_budget_mobileassignment.expenses
+package my.edu.tarc.debtdecoderApp.expenses
 
 import android.content.Context
 import android.os.Bundle
@@ -13,6 +13,7 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.google.firebase.auth.FirebaseAuth
 import my.edu.tarc.debtdecoder.R
 import my.edu.tarc.debtdecoder.databinding.FragmentInsightMonthlyExpensesBinding
 import java.time.YearMonth
@@ -42,23 +43,29 @@ class InsightMonthlyExpensesFragment : Fragment() {
             return
         }
 
-        val userId = "userId1"
+        val user = FirebaseAuth.getInstance().currentUser
+        user?.let { firebaseUser ->
+            val userId = firebaseUser.uid
+            expenseInsightCalculator = ExpenseInsightCalculator(userId)
+            expenseInsightCalculator.fetchExpenses { expenses ->
+                if (isAdded && _binding != null) {
+                    val currentYear = YearMonth.now().year
+                    val currentMonth = YearMonth.now().monthValue
+                    val previousMonth = if (currentMonth == 1) 12 else currentMonth - 1
+                    val previousYear = if (currentMonth == 1) currentYear - 1 else currentYear
 
-        expenseInsightCalculator = ExpenseInsightCalculator(userId)
-        expenseInsightCalculator.fetchExpenses { expenses ->
-            if (isAdded && _binding != null) {
-                val currentYear = YearMonth.now().year
-                val currentMonth = YearMonth.now().monthValue
-                val previousMonth = if (currentMonth == 1) 12 else currentMonth - 1
-                val previousYear = if (currentMonth == 1) currentYear - 1 else currentYear
+                    val currentMonthData = prepareChartData(currentYear, currentMonth)
+                    val previousMonthData = prepareChartData(previousYear, previousMonth)
 
-                val currentMonthData = prepareChartData(currentYear, currentMonth)
-                val previousMonthData = prepareChartData(previousYear, previousMonth)
-
-                if (currentMonthData.isEmpty() || previousMonthData.isEmpty()) {
-                    Toast.makeText(requireContext(), "No expenses found for the current month.", Toast.LENGTH_SHORT).show()
-                } else {
-                    updateChart(currentMonthData, previousMonthData)
+                    if (currentMonthData.isEmpty() || previousMonthData.isEmpty()) {
+                        Toast.makeText(
+                            requireContext(),
+                            "No expenses found for the current month.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        updateChart(currentMonthData, previousMonthData)
+                    }
                 }
             }
         }
@@ -90,8 +97,8 @@ class InsightMonthlyExpensesFragment : Fragment() {
     private fun updateChart(currentData: List<Entry>, previousData: List<Entry>) {
         val currentDataSet = LineDataSet(currentData, "Current Month").apply {
             setDrawValues(false)
-            color = ContextCompat.getColor(context!!, R.color.dark_blue)
-            setCircleColor(ContextCompat.getColor(context!!, R.color.dark_blue))
+            color = ContextCompat.getColor(requireContext(), R.color.dark_blue)
+            setCircleColor(ContextCompat.getColor(requireContext(), R.color.dark_blue))
             lineWidth = 2.5f
             setDrawFilled(false)
             valueTextSize = 10f
@@ -99,8 +106,8 @@ class InsightMonthlyExpensesFragment : Fragment() {
 
         val previousDataSet = LineDataSet(previousData, "Previous Month").apply {
             setDrawValues(false)
-            color = ContextCompat.getColor(context!!, R.color.dark_red)
-            setCircleColor(ContextCompat.getColor(context!!, R.color.dark_red))
+            color = ContextCompat.getColor(requireContext(), R.color.dark_red)
+            setCircleColor(ContextCompat.getColor(requireContext(), R.color.dark_red))
             lineWidth = 2.5f
             setDrawFilled(false)
             valueTextSize = 10f

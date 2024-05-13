@@ -1,4 +1,4 @@
-package com.example.expenses_and_budget_mobileassignment.More
+package my.edu.tarc.debtdecoderApp.More
 
 import android.app.AlertDialog
 import android.graphics.Color
@@ -11,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.NumberPicker
 import android.widget.TextView
 import android.widget.Toast

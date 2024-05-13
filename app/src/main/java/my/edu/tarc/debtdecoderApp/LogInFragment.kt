@@ -118,7 +118,7 @@ class LoginFragment : Fragment() {
                                     Toast.makeText(requireContext(), "Login successful!", Toast.LENGTH_SHORT).show()
                                     findNavController().navigate(R.id.action_login_to_navigationdash)
                                 } else {
-                                    Toast.makeText(requireContext(), "com.example.expenses_and_budget_mobileassignment.User data not found", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(requireContext(), "my.edu.tarc.debtdecoderApp.User data not found", Toast.LENGTH_SHORT).show()
                                 }
                             }
 

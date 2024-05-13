@@ -1,5 +1,4 @@
-package com.example.expenses_and_budget_mobileassignment.expenses
-
+package my.edu.tarc.debtdecoderApp.expenses
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -9,19 +8,20 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.expenses_and_budget_mobileassignment.data.Expense
-import com.example.expenses_and_budget_mobileassignment.data.ExpenseItem
-import com.example.expenses_and_budget_mobileassignment.data.FirebaseExpensesHelper
-import com.example.expenses_and_budget_mobileassignment.data.ListItem
-import com.example.expenses_and_budget_mobileassignment.data.SectionHeader
-import com.example.expenses_and_budget_mobileassignment.util.DateFormatter
-import com.example.expenses_and_budget_mobileassignment.util.GlideImageLoader
+import my.edu.tarc.debtdecoderApp.data.Expense
+import my.edu.tarc.debtdecoderApp.data.ExpenseItem
+import my.edu.tarc.debtdecoderApp.data.FirebaseExpensesHelper
+import my.edu.tarc.debtdecoderApp.data.ListItem
+import my.edu.tarc.debtdecoderApp.data.SectionHeader
+import my.edu.tarc.debtdecoderApp.util.DateFormatter
+import my.edu.tarc.debtdecoderApp.util.GlideImageLoader
 import com.example.expenses_and_budget_mobileassignment.util.getFirebaseHelperInstance
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.google.firebase.auth.FirebaseAuth
 import my.edu.tarc.debtdecoder.R
 import my.edu.tarc.debtdecoder.databinding.FragmentExpensesTimelineBinding
 
@@ -48,13 +48,13 @@ class ExpensesTimelineFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (isAdded && binding != null) {
+        if (isAdded && _binding != null) {
             setupRecyclerView()
             fetchExpensesAndUpdateUI()
         }
 
         binding.btnAddExpense.setOnClickListener {
-            if (isAdded && binding != null) {
+            if (isAdded && _binding != null) {
                 try {
                     findNavController().navigate(R.id.action_expensesTimelineFragment_to_addExpenseFragment)
                 } catch (e: Exception) {
@@ -73,14 +73,20 @@ class ExpensesTimelineFragment : Fragment() {
     }
 
     private fun fetchExpensesAndUpdateUI() {
-        expensesFirebaseHelper.getExpensesForLastDays("userId1", 7) { expenses ->
-            if (isAdded && _binding != null) {
-                val sectionedExpenses = transformToSectionedExpenses(expenses)
-                updateRecyclerView(sectionedExpenses)
+        val user = FirebaseAuth.getInstance().currentUser
+        user?.let { firebaseUser ->
+            val userId = firebaseUser.uid
+            Log.d("UserID", "User ID: $userId")
 
-                val expensesByDate = groupExpensesByDate(expenses)
-                val chartEntries = prepareChartData(expensesByDate)
-                updateBarChart(chartEntries)
+            expensesFirebaseHelper.getExpensesForLastDays(userId, 7) { expenses ->
+                if (isAdded && _binding != null) {
+                    val sectionedExpenses = transformToSectionedExpenses(expenses)
+                    updateRecyclerView(sectionedExpenses)
+
+                    val expensesByDate = groupExpensesByDate(expenses)
+                    val chartEntries = prepareChartData(expensesByDate)
+                    updateBarChart(chartEntries)
+                }
             }
         }
     }

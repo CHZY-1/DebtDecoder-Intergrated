@@ -1,8 +1,9 @@
 package com.example.expenses_and_budget_mobileassignment.util
 
 import android.content.Context
-import com.example.expenses_and_budget_mobileassignment.data.ExpenseCategory
-import com.example.expenses_and_budget_mobileassignment.data.FirebaseExpensesHelper
+import my.edu.tarc.debtdecoderApp.data.ExpenseCategory
+import my.edu.tarc.debtdecoderApp.data.FirebaseExpensesHelper
+import my.edu.tarc.debtdecoderApp.util.GlideImageLoader
 
 object ExpenseCategoryManager {
     private var categories: Map<String, ExpenseCategory>? = null

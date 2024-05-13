@@ -42,13 +42,13 @@
     <!-- Add an expense -->
     <fragment
         android:id="@+id/addExpenseFragment"
-        android:name="com.example.expenses_and_budget_mobileassignment.expenses.AddExpenseFragment"
+        android:name="my.edu.tarc.debtdecoderApp.expenses.AddExpenseFragment"
         android:label="fragment_add_expense"
         tools:layout="@layout/fragment_add_expense" />
 
     <fragment
         android:id="@+id/editExpensesListingFragment"
-        android:name="com.example.expenses_and_budget_mobileassignment.expenses.EditExpensesListingFragment"
+        android:name="my.edu.tarc.debtdecoderApp.expenses.EditExpensesListingFragment"
         android:label="EditExpensesListingFragment" >
         <action
             android:id="@+id/action_editExpensesListingFragment_to_trackExpenseFragment"
@@ -56,19 +56,19 @@
     </fragment>
     <fragment
         android:id="@+id/trackExpenseFragment"
-        android:name="com.example.expenses_and_budget_mobileassignment.expenses.TrackExpenseFragment"
+        android:name="my.edu.tarc.debtdecoderApp.expenses.TrackExpenseFragment"
         android:label="TrackExpenseFragment" />
     <fragment
         android:id="@+id/expensesTimelineFragment"
-        android:name="com.example.expenses_and_budget_mobileassignment.expenses.ExpensesTimelineFragment"
+        android:name="my.edu.tarc.debtdecoderApp.expenses.ExpensesTimelineFragment"
         android:label="ExpensesTimelineFragment" />
     <fragment
         android:id="@+id/displayExpenseCategoriesFragment"
-        android:name="com.example.expenses_and_budget_mobileassignment.expenses.DisplayExpenseCategoriesFragment"
+        android:name="my.edu.tarc.debtdecoderApp.expenses.DisplayExpenseCategoriesFragment"
         android:label="DisplayExpenseCategoriesFragment" />
     <fragment
         android:id="@+id/insightMonthlyExpensesFragment"
-        android:name="com.example.expenses_and_budget_mobileassignment.expenses.InsightMonthlyExpensesFragment"
+        android:name="my.edu.tarc.debtdecoderApp.expenses.InsightMonthlyExpensesFragment"
         android:label="InsightMonthlyExpensesFragment" />
 
 
@@ -82,7 +82,7 @@
 
     <fragment
         android:id="@+id/navigation_more"
-        android:name="com.example.expenses_and_budget_mobileassignment.MoreFragment"
+        android:name="my.edu.tarc.debtdecoderApp.MoreFragment"
         android:label="More"
         tools:layout="@layout/fragment_more">
         <action
@@ -95,7 +95,7 @@
 
     <fragment
         android:id="@+id/income"
-        android:name="com.example.expenses_and_budget_mobileassignment.More.IncomeFragment"
+        android:name="my.edu.tarc.debtdecoderApp.More.IncomeFragment"
         android:label="Income"
         tools:layout="@layout/fragment_income">
         <action
@@ -108,7 +108,7 @@
 
     <fragment
         android:id="@+id/addIncome"
-        android:name="com.example.expenses_and_budget_mobileassignment.More.AddIncomeFragment"
+        android:name="my.edu.tarc.debtdecoderApp.More.AddIncomeFragment"
         android:label="AddIncome"
         tools:layout="@layout/fragment_add_income">
         <action
@@ -118,7 +118,7 @@
 
     <fragment
         android:id="@+id/myAccount"
-        android:name="com.example.expenses_and_budget_mobileassignment.More.MyAccountFragment"
+        android:name="my.edu.tarc.debtdecoderApp.More.MyAccountFragment"
         android:label="myAccount">
         <action
             android:id="@+id/action_myAcc_to_login"
@@ -148,7 +148,7 @@
     <!-- Sign Up Fragment -->
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.expenses_and_budget_mobileassignment.SignUpFragment"
+        android:name="my.edu.tarc.debtdecoderApp.SignUpFragment"
         android:label="Sign Up">
         <action
             android:id="@+id/action_signup_to_preferences1"
@@ -161,7 +161,7 @@
     <!-- Forgot Password Fragment -->
     <fragment
         android:id="@+id/forgotPassFragment"
-        android:name="com.example.expenses_and_budget_mobileassignment.ForgotPassFragment"
+        android:name="my.edu.tarc.debtdecoderApp.ForgotPassFragment"
         android:label="Forgot Password">
         <action
             android:id="@+id/action_forgot_to_login"
@@ -171,7 +171,7 @@
     <!-- Preferences 1 Fragment -->
     <fragment
         android:id="@+id/preferences1Fragment"
-        android:name="com.example.expenses_and_budget_mobileassignment.Preferences1Fragment"
+        android:name="my.edu.tarc.debtdecoderApp.Preferences1Fragment"
         android:label="Preferences 1">
         <action
             android:id="@+id/action_preferences1_to_preferences2"
@@ -181,7 +181,7 @@
     <!-- Preferences 2 Fragment -->
     <fragment
         android:id="@+id/preferences2Fragment"
-        android:name="com.example.expenses_and_budget_mobileassignment.Preferences2Fragment"
+        android:name="my.edu.tarc.debtdecoderApp.Preferences2Fragment"
         android:label="Preferences 2">
         <action
             android:id="@+id/action_preferences2_to_preferences3"
@@ -191,7 +191,7 @@
     <!-- Preferences 3 Fragment -->
     <fragment
         android:id="@+id/preferences3Fragment"
-        android:name="com.example.expenses_and_budget_mobileassignment.Preferences3Fragment"
+        android:name="my.edu.tarc.debtdecoderApp.Preferences3Fragment"
         android:label="Preferences 3">
         <action
             android:id="@+id/action_preferences3_to_login"

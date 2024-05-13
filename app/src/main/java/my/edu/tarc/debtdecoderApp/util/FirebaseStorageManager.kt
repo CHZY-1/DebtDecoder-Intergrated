@@ -1,16 +1,6 @@
 package com.example.expenses_and_budget_mobileassignment.util
-import com.example.expenses_and_budget_mobileassignment.data.FirebaseStorageHelper
+import my.edu.tarc.debtdecoderApp.data.FirebaseStorageHelper
 import com.google.firebase.storage.FirebaseStorage
-//object FirebaseStorageManager {
-//    private val instance: FirebaseStorage by lazy {
-//        FirebaseStorage.getInstance()
-//    }
-//
-//    fun getStorage(): FirebaseStorage {
-//        return instance
-//    }
-//}
-//
 
 
 object FirebaseStorageManager {

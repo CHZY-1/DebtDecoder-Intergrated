@@ -11,7 +11,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.expenses_and_budget_mobileassignment.util.FirebaseStorageManager
-import com.example.expenses_and_budget_mobileassignment.util.FirebaseSynchronizationManager
+import my.edu.tarc.debtdecoderApp.util.FirebaseSynchronizationManager
 import com.example.expenses_and_budget_mobileassignment.util.getFirebaseInstance
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage

@@ -1,4 +1,4 @@
-package com.example.expenses_and_budget_mobileassignment.More
+package my.edu.tarc.debtdecoderApp.More
 
 // Updated data class representing an ad hoc income item
 data class AdHocIncomeItem(

@@ -1,4 +1,4 @@
-package com.example.expenses_and_budget_mobileassignment.More
+package my.edu.tarc.debtdecoderApp.More
 
 import android.app.DatePickerDialog
 import android.os.Bundle
@@ -8,8 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth

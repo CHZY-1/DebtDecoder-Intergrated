@@ -1,7 +1,7 @@
-package com.example.expenses_and_budget_mobileassignment.data
+package my.edu.tarc.debtdecoderApp.data
 
 import android.util.Log
-import com.example.expenses_and_budget_mobileassignment.util.DateFormatter
+import my.edu.tarc.debtdecoderApp.util.DateFormatter
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.DataSnapshot

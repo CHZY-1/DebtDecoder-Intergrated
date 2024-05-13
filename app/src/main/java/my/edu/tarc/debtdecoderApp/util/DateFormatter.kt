@@ -1,4 +1,4 @@
-package com.example.expenses_and_budget_mobileassignment.util
+package my.edu.tarc.debtdecoderApp.util
 
 import android.annotation.SuppressLint
 import java.text.DateFormatSymbols
@@ -53,10 +53,10 @@ object DateFormatter {
     // return start date string and end date string in ISO 8601 format
     fun getDateRange(numberOfDays: Int): Pair<String, String> {
         val calendar = Calendar.getInstance()
-        val endDate = DateFormatter.getTodayInIso8601Format()
+        val endDate = getTodayInIso8601Format()
 
         calendar.add(Calendar.DAY_OF_YEAR, -numberOfDays)
-        val startDate = DateFormatter.formatToIso8601(calendar.time)
+        val startDate = formatToIso8601(calendar.time)
 
         return Pair(startDate, endDate)
     }

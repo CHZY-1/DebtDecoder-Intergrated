@@ -1,4 +1,4 @@
-package com.example.expenses_and_budget_mobileassignment.More
+package my.edu.tarc.debtdecoderApp.More
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

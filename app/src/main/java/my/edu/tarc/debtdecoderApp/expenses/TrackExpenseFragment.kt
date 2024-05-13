@@ -1,8 +1,7 @@
-package com.example.expenses_and_budget_mobileassignment.expenses
+package my.edu.tarc.debtdecoderApp.expenses
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,10 +13,11 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.example.expenses_and_budget_mobileassignment.data.FirebaseExpensesHelper
-import com.example.expenses_and_budget_mobileassignment.data.SharedDateViewModel
-import com.example.expenses_and_budget_mobileassignment.util.DateFormatter
+import my.edu.tarc.debtdecoderApp.data.FirebaseExpensesHelper
+import my.edu.tarc.debtdecoderApp.data.SharedDateViewModel
+import my.edu.tarc.debtdecoderApp.util.DateFormatter
 import com.example.expenses_and_budget_mobileassignment.util.getFirebaseHelperInstance
+import com.google.firebase.auth.FirebaseAuth
 import my.edu.tarc.debtdecoder.R
 import my.edu.tarc.debtdecoder.databinding.FragmentTrackExpenseBinding
 import java.text.DateFormatSymbols
@@ -48,7 +48,10 @@ class TrackExpenseFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        getMonthsAndYearsArray("userId1") { months, years, mostRecentMonth, mostRecentYear ->
+        val user = FirebaseAuth.getInstance().currentUser
+        user?.let { firebaseUser ->
+            val userID = firebaseUser.uid
+            getMonthsAndYearsArray(userID) { months, years, mostRecentMonth, mostRecentYear ->
 
                 binding.expenseSpinnerMonth.adapter = ArrayAdapter(
                     requireContext(),
@@ -77,7 +80,7 @@ class TrackExpenseFragment: Fragment() {
                         position: Int,
                         id: Long
                     ) {
-                        updateCalendar("userId1")
+                        updateCalendar(userID)
                     }
 
                     override fun onNothingSelected(parent: AdapterView<*>) {}
@@ -85,6 +88,7 @@ class TrackExpenseFragment: Fragment() {
                 binding.expenseSpinnerMonth.onItemSelectedListener = onItemSelectedListener
                 binding.expenseSpinnerYear.onItemSelectedListener = onItemSelectedListener
             }
+        }
     }
 
     // Get months and years that exist in the user expense list object

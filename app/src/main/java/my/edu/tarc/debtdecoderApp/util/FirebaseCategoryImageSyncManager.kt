@@ -1,4 +1,4 @@
-package com.example.expenses_and_budget_mobileassignment.util
+package my.edu.tarc.debtdecoderApp.util
 
 import android.content.Context
 import android.util.Log

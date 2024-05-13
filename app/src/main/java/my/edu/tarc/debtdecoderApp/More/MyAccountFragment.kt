@@ -1,4 +1,4 @@
-package com.example.expenses_and_budget_mobileassignment.More
+package my.edu.tarc.debtdecoderApp.More
 
 import android.app.Activity
 import android.content.Intent
@@ -156,8 +156,8 @@ class MyAccountFragment : Fragment() {
                     }
                 }
             } else {
-                Log.e("MyAccountFragment", "com.example.expenses_and_budget_mobileassignment.User data not found in Realtime Database")
-                Toast.makeText(requireContext(), "com.example.expenses_and_budget_mobileassignment.User data not found", Toast.LENGTH_SHORT).show()
+                Log.e("MyAccountFragment", "my.edu.tarc.debtdecoderApp.User data not found in Realtime Database")
+                Toast.makeText(requireContext(), "my.edu.tarc.debtdecoderApp.User data not found", Toast.LENGTH_SHORT).show()
                 profileImageView?.setImageResource(R.drawable.ic_account) // Set to default image
             }
         }.addOnFailureListener { e ->

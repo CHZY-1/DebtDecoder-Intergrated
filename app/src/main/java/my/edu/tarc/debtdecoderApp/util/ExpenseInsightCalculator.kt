@@ -1,9 +1,9 @@
 package com.example.expenses_and_budget_mobileassignment.util
 
 import android.util.Log
-import com.example.expenses_and_budget_mobileassignment.data.Expense
-import com.example.expenses_and_budget_mobileassignment.data.ExpenseTopCategoryItem
-import com.example.expenses_and_budget_mobileassignment.data.FirebaseExpensesHelper
+import my.edu.tarc.debtdecoderApp.data.Expense
+import my.edu.tarc.debtdecoderApp.data.ExpenseTopCategoryItem
+import my.edu.tarc.debtdecoderApp.data.FirebaseExpensesHelper
 import java.text.DateFormatSymbols
 import java.time.YearMonth
 

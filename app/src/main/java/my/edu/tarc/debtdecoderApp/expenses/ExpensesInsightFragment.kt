@@ -1,15 +1,15 @@
-package com.example.expenses_and_budget_mobileassignment.expenses
+package my.edu.tarc.debtdecoderApp.expenses
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.expenses_and_budget_mobileassignment.util.DateFormatter
+import my.edu.tarc.debtdecoderApp.util.DateFormatter
 import com.example.expenses_and_budget_mobileassignment.util.ExpenseInsightCalculator
+import com.google.firebase.auth.FirebaseAuth
 import my.edu.tarc.debtdecoder.R
 import my.edu.tarc.debtdecoder.databinding.FragmentExpensesInsightBinding
 import java.util.Calendar
@@ -36,28 +36,31 @@ class ExpensesInsightFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val userId = "userId1"
-
         val (startDate, endDate) = DateFormatter.getCurrentMonthDateRange()
         binding.tvInsightDateCategories.text = "$startDate - $endDate"
         binding.tvInsightDateMonthlyExpense.text = "$startDate - $endDate"
 
-        expenseInsightCalculator = ExpenseInsightCalculator(userId)
-        expenseInsightCalculator.fetchExpenses { expenses ->
-            if (isAdded && _binding != null) {
-                // get current year and month
-                // only show insight for current month
-                val calendar = Calendar.getInstance()
-                val year = calendar.get(Calendar.YEAR)
-                val month = calendar.get(Calendar.MONTH) + 1
+        val user = FirebaseAuth.getInstance().currentUser
+        user?.let { firebaseUser ->
+            val userId = firebaseUser.uid
+            expenseInsightCalculator = ExpenseInsightCalculator(userId)
+            expenseInsightCalculator.fetchExpenses { expenses ->
+                if (isAdded && _binding != null) {
+                    // get current year and month
+                    // only show insight for current month
+                    val calendar = Calendar.getInstance()
+                    val year = calendar.get(Calendar.YEAR)
+                    val month = calendar.get(Calendar.MONTH) + 1
 
-                if (expenses.isNotEmpty()) {
-                    updateExpenseCategoriesSection(year, month)
-                    updateMonthlyExpensesSection(year, month)
-                } else {
-                    hideInsightCategoriesSections()
-                    hideInsightSpendingSections()
+                    if (expenses.isNotEmpty()) {
+                        updateExpenseCategoriesSection(year, month)
+                        updateMonthlyExpensesSection(year, month)
+                    } else {
+                        hideInsightCategoriesSections()
+                        hideInsightSpendingSections()
+                    }
                 }
+
             }
         }
 
@@ -84,8 +87,7 @@ class ExpensesInsightFragment : Fragment() {
 
                 if (topSpending != null) {
                     binding.tvInsightCategories2.text = String.format(
-                        "Top Spending Category for %d-%d: %s RM %.2f",
-                        year,
+                        "Top Spending Category for %d-%d: %s RM %.2f",year,
                         month,
                         topSpending.first,
                         topSpending.second

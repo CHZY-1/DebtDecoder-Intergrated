@@ -1,7 +1,5 @@
-package com.example.expenses_and_budget_mobileassignment.data
+package my.edu.tarc.debtdecoderApp.data
 
-import android.net.Uri
-import android.util.Log
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.tasks.await
 

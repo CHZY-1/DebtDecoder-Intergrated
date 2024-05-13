@@ -1,4 +1,4 @@
-package com.example.expenses_and_budget_mobileassignment.expenses
+package my.edu.tarc.debtdecoderApp.expenses
 
 import android.content.Context
 import android.graphics.Color
@@ -10,16 +10,17 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.expenses_and_budget_mobileassignment.data.ExpenseTopCategoryItem
-import com.example.expenses_and_budget_mobileassignment.util.DateFormatter
+import my.edu.tarc.debtdecoderApp.data.ExpenseTopCategoryItem
+import my.edu.tarc.debtdecoderApp.util.DateFormatter
 import com.example.expenses_and_budget_mobileassignment.util.ExpenseInsightCalculator
-import com.example.expenses_and_budget_mobileassignment.util.GlideImageLoader
+import my.edu.tarc.debtdecoderApp.util.GlideImageLoader
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
+import com.google.firebase.auth.FirebaseAuth
 import my.edu.tarc.debtdecoder.databinding.FragmentDisplayExpenseCategoriesBinding
 
 class DisplayExpenseCategoriesFragment : Fragment() {
@@ -48,25 +49,28 @@ class DisplayExpenseCategoriesFragment : Fragment() {
             return
         }
 
-        val userId = "userId1"
-        expenseInsightCalculator = ExpenseInsightCalculator(userId)
-
-        expenseInsightCalculator.fetchExpenses { expenses ->
-            expenseInsightCalculator.getExpenseTopCategoryItems { topExpenseCategories ->
-                // make sure fragment is still added and the binding is available
-                if (isAdded && _binding != null) {
+        val user = FirebaseAuth.getInstance().currentUser
+        user?.let { firebaseUser ->
+            val userId = firebaseUser.uid
+            expenseInsightCalculator = ExpenseInsightCalculator(userId)
+            expenseInsightCalculator.fetchExpenses { expenses ->
+                expenseInsightCalculator.getExpenseTopCategoryItems { topExpenseCategories ->
+                    // make sure fragment is still added and the binding is available
+                    if (isAdded && _binding != null) {
 //                    Log.d("CategoryInsights", "topExpenseCategories recycle view: $topExpenseCategories")
-                    setupRecycleView(topExpenseCategories)
+                        setupRecycleView(topExpenseCategories)
 
-                    if (topExpenseCategories.isEmpty()) {
+                        if (topExpenseCategories.isEmpty()) {
 //                        Log.d("ExpenseDebug", "No categories to display.")
-                    } else {
+                        } else {
 //                    Log.d("ExpenseDebug", "Adapter set with data.")
-                        setupCategoryPieChart(topExpenseCategories)
-                        setupDateSpinner()
-                    }
+                            setupCategoryPieChart(topExpenseCategories)
+                            setupDateSpinner()
+                        }
 
+                    }
                 }
+
             }
         }
 

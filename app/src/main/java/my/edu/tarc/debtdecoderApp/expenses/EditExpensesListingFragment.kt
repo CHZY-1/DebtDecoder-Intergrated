@@ -1,4 +1,4 @@
-package com.example.expenses_and_budget_mobileassignment.expenses
+package my.edu.tarc.debtdecoderApp.expenses
 
 import android.app.AlertDialog
 import android.content.Context
@@ -11,11 +11,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.example.expenses_and_budget_mobileassignment.data.FirebaseExpensesHelper
-import com.example.expenses_and_budget_mobileassignment.data.SharedDateViewModel
-import com.example.expenses_and_budget_mobileassignment.util.DateFormatter
-import com.example.expenses_and_budget_mobileassignment.util.GlideImageLoader
+import my.edu.tarc.debtdecoderApp.data.FirebaseExpensesHelper
+import my.edu.tarc.debtdecoderApp.data.SharedDateViewModel
+import my.edu.tarc.debtdecoderApp.util.DateFormatter
+import my.edu.tarc.debtdecoderApp.util.GlideImageLoader
 import com.example.expenses_and_budget_mobileassignment.util.getFirebaseHelperInstance
+import com.google.firebase.auth.FirebaseAuth
 import my.edu.tarc.debtdecoder.R
 import my.edu.tarc.debtdecoder.databinding.FragmentEditExpensesListingBinding
 import java.util.Date
@@ -74,57 +75,61 @@ class EditExpensesListingFragment : Fragment() {
                     .setPositiveButton("Delete") { dialog, which ->
                         val totalAmountBeforeDeletion = adapter.getTotalExpense()
 
-                        // Delete selected expenses from Firebase
-                        expensesFirebaseHelper.deleteExpenses(
-                            "userId1",
-                            selectedExpenses
-                        ) { success ->
-                            if (success) {
-                                // Refresh the expenses adapter
-                                adapter.removeDeletedExpenses(selectedExpenses)
+                        val user = FirebaseAuth.getInstance().currentUser
+                        user?.let { firebaseUser ->
+                            val userId = firebaseUser.uid
+                            // Delete selected expenses from Firebase
+                            expensesFirebaseHelper.deleteExpenses(
+                                userId,
+                                selectedExpenses
+                            ) { success ->
+                                if (success) {
+                                    // Refresh the expenses adapter
+                                    adapter.removeDeletedExpenses(selectedExpenses)
 
-                                // Calculate and display remaining total expense after deletion
-                                val totalAmountAfterDeletion = adapter.getTotalExpense()
-                                val remainingTotalAmount =
-                                    totalAmountBeforeDeletion - totalAmountAfterDeletion
-                                Log.d(
-                                    "ExpenseDeletion",
-                                    "Successfully deleted $count expenses. Remaining total amount: $remainingTotalAmount"
-                                )
+                                    // Calculate and display remaining total expense after deletion
+                                    val totalAmountAfterDeletion = adapter.getTotalExpense()
+                                    val remainingTotalAmount =
+                                        totalAmountBeforeDeletion - totalAmountAfterDeletion
+                                    Log.d(
+                                        "ExpenseDeletion",
+                                        "Successfully deleted $count expenses. Remaining total amount: $remainingTotalAmount"
+                                    )
 
-                                val formattedDate = DateFormatter.formatToIso8601(
-                                    dateViewModel.selectedDate.value?.time ?: Date()
-                                )
-                                displayExpenseHeader(formattedDate, remainingTotalAmount)
+                                    val formattedDate = DateFormatter.formatToIso8601(
+                                        dateViewModel.selectedDate.value?.time ?: Date()
+                                    )
+                                    displayExpenseHeader(formattedDate, remainingTotalAmount)
 
-                                // Show success message
-                                Toast.makeText(
-                                    requireContext(),
-                                    "Expenses deleted successfully",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                setupDeleteExpenseView(false, false, false, "Expenses")
-
-                                // Navigate back if no expenses left for the selected date
-                                if (totalAmountAfterDeletion <= 0) {
-//                                findNavController().navigate(R.id.action_editExpensesListingFragment_to_trackExpenseFragment)
-                                findNavController().popBackStack()
+                                    // Show success message
                                     Toast.makeText(
                                         requireContext(),
-                                        "No expenses left for ${
-                                            DateFormatter.formatForDisplay(formattedDate)
-                                        }",
+                                        "Expenses deleted successfully",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    setupDeleteExpenseView(false, false, false, "Expenses")
+
+                                    // Navigate back if no expenses left for the selected date
+                                    if (totalAmountAfterDeletion <= 0) {
+//                                findNavController().navigate(R.id.action_editExpensesListingFragment_to_trackExpenseFragment)
+                                        findNavController().popBackStack()
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "No expenses left for ${
+                                                DateFormatter.formatForDisplay(formattedDate)
+                                            }",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+
+                                } else {
+                                    // Show error message
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Failed to delete expenses",
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
-
-                            } else {
-                                // Show error message
-                                Toast.makeText(
-                                    requireContext(),
-                                    "Failed to delete expenses",
-                                    Toast.LENGTH_SHORT
-                                ).show()
                             }
                         }
                     }
@@ -158,13 +163,17 @@ class EditExpensesListingFragment : Fragment() {
             val formattedDate = DateFormatter.formatToIso8601(calendar.time)
             Log.d("EditExpensesListingFragment", "formattedDate: $formattedDate")
 
-            expensesFirebaseHelper.getExpensesByDate("userId1", formattedDate) { expenses ->
-                // Update RecyclerView with fetched expenses
-                adapter.updateData(expenses)
+            val user = FirebaseAuth.getInstance().currentUser
+            user?.let { firebaseUser ->
+                val userId = firebaseUser.uid
+                expensesFirebaseHelper.getExpensesByDate(userId, formattedDate) { expenses ->
+                    // Update RecyclerView with fetched expenses
+                    adapter.updateData(expenses)
 
-                // Calculate and display total expense for the selected date
-                val totalExpense = expenses.sumOf { it.amount }
-                displayExpenseHeader(formattedDate, totalExpense)
+                    // Calculate and display total expense for the selected date
+                    val totalExpense = expenses.sumOf { it.amount }
+                    displayExpenseHeader(formattedDate, totalExpense)
+                }
             }
         }
     }

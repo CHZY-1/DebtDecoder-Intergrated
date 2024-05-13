@@ -1,6 +1,5 @@
-package com.example.expenses_and_budget_mobileassignment.expenses
+package my.edu.tarc.debtdecoderApp.expenses
 
-import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Bundle
@@ -10,15 +9,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.example.expenses_and_budget_mobileassignment.data.Expense
-import com.example.expenses_and_budget_mobileassignment.data.ExpenseCategory
-import com.example.expenses_and_budget_mobileassignment.data.FirebaseExpensesHelper
-import com.example.expenses_and_budget_mobileassignment.util.DateFormatter
-import com.example.expenses_and_budget_mobileassignment.util.GlideImageLoader
+import my.edu.tarc.debtdecoderApp.data.Expense
+import my.edu.tarc.debtdecoderApp.data.ExpenseCategory
+import my.edu.tarc.debtdecoderApp.data.FirebaseExpensesHelper
+import com.example.expenses_and_budget_mobileassignment.expenses.CategoryPickerFragment
+import my.edu.tarc.debtdecoderApp.util.DateFormatter
+import my.edu.tarc.debtdecoderApp.util.GlideImageLoader
 import com.example.expenses_and_budget_mobileassignment.util.getFirebaseHelperInstance
+import com.google.firebase.auth.FirebaseAuth
 import my.edu.tarc.debtdecoder.R
 import my.edu.tarc.debtdecoder.databinding.FragmentAddExpenseBinding
 import java.util.Calendar
@@ -101,32 +101,35 @@ class AddExpenseFragment : Fragment(), CategorySelectionListener {
                     val remark = binding.etExpenseRemark.text.toString().trim()
 
                     if (formattedDate != null) {
-                        val userID = "userId1"
-                        val expense = Expense(
-                            "",
-                            amount,
-                            category,
-                            paymentMethod,
-                            formattedDate,
-                            recurrence,
-                            remark
-                        )
+                        val user = FirebaseAuth.getInstance().currentUser
+                        user?.let { firebaseUser ->
+                            val userID = firebaseUser.uid
+                            val expense = Expense(
+                                "",
+                                amount,
+                                category,
+                                paymentMethod,
+                                formattedDate,
+                                recurrence,
+                                remark
+                            )
 
-                        addExpense(userID, expense) { isSuccess ->
-                            if (isAdded) {
-                                if (isSuccess) {
-                                    Toast.makeText(
-                                        requireContext(),
-                                        "Expense added successfully!",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                    findNavController().popBackStack()
-                                } else {
-                                    Toast.makeText(
-                                        requireContext(),
-                                        "Failed to add expense",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
+                            addExpense(userID, expense) { isSuccess ->
+                                if (isAdded) {
+                                    if (isSuccess) {
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "Expense added successfully!",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        findNavController().popBackStack()
+                                    } else {
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "Failed to add expense",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
                                 }
                             }
                         }
@@ -141,6 +144,7 @@ class AddExpenseFragment : Fragment(), CategorySelectionListener {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+
             }
         }
     }

@@ -1,6 +1,6 @@
 package com.example.expenses_and_budget_mobileassignment.util
 
-import com.example.expenses_and_budget_mobileassignment.data.FirebaseExpensesHelper
+import my.edu.tarc.debtdecoderApp.data.FirebaseExpensesHelper
 import com.google.firebase.database.FirebaseDatabase
 
 object FirebaseExpensesHelperManager {
@@ -32,7 +32,7 @@ object FirebaseExpensesHelperManager {
     }
 }
 
-fun getFirebaseHelperInstance(databaseUrl: String = "https://expensesandbudget-55687-default-rtdb.asia-southeast1.firebasedatabase.app"): FirebaseExpensesHelper {
+fun getFirebaseHelperInstance(databaseUrl: String = "https://debtdecoder-bcf2c-default-rtdb.firebaseio.com"): FirebaseExpensesHelper {
     val firebaseManager = FirebaseExpensesHelperManager
     if (!firebaseManager.isInitialized()) {
         firebaseManager.initialize(FirebaseDatabase.getInstance(databaseUrl))
@@ -40,7 +40,7 @@ fun getFirebaseHelperInstance(databaseUrl: String = "https://expensesandbudget-5
     return firebaseManager.getInstance()
 }
 
-fun getFirebaseInstance(databaseUrl: String = "https://expensesandbudget-55687-default-rtdb.asia-southeast1.firebasedatabase.app"): FirebaseDatabase{
+fun getFirebaseInstance(databaseUrl: String = "https://debtdecoder-bcf2c-default-rtdb.firebaseio.com"): FirebaseDatabase{
     val firebaseManager = FirebaseExpensesHelperManager
     if (!firebaseManager.isInitialized()) {
         firebaseManager.initialize(FirebaseDatabase.getInstance(databaseUrl))

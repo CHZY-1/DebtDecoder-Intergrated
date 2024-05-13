@@ -11,6 +11,9 @@ import com.example.expenses_and_budget_mobileassignment.util.ExpenseCategoryMana
 import com.google.android.material.tabs.TabLayoutMediator
 import my.edu.tarc.debtdecoder.databinding.FragmentExpensesBinding
 import my.edu.tarc.debtdecoderApp.MainActivity
+import my.edu.tarc.debtdecoderApp.expenses.ExpensesInsightFragment
+import my.edu.tarc.debtdecoderApp.expenses.ExpensesTimelineFragment
+import my.edu.tarc.debtdecoderApp.expenses.TrackExpenseFragment
 
 class ExpensesFragment : Fragment() {
 

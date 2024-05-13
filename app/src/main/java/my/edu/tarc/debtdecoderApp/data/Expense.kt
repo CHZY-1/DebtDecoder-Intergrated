@@ -1,4 +1,4 @@
-package com.example.expenses_and_budget_mobileassignment.data
+package my.edu.tarc.debtdecoderApp.data
 import com.google.firebase.database.PropertyName
 
 // contain all the data model for the expense module

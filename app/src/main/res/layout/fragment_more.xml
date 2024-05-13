@@ -28,7 +28,7 @@
             android:layout_marginEnd="16dp"
             android:contentDescription="Profile Picture"/>
 
-        <!-- com.example.expenses_and_budget_mobileassignment.User Email -->
+        <!-- my.edu.tarc.debtdecoderApp.User Email -->
         <TextView
             android:id="@+id/tvUserEmail"
             android:layout_width="wrap_content"
