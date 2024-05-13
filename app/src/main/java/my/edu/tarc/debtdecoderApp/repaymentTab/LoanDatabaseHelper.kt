@@ -1,8 +1,9 @@
-package my.edu.yyass.repaymentTab
+package my.edu.tarc.debtdecoderApp.repaymentTab
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import my.edu.yyass.Loan
 
 class LoanDatabaseHelper(context: Context) :
@@ -200,6 +201,7 @@ class LoanDatabaseHelper(context: Context) :
         db.rawQuery(query, null).use { cursor ->
             if (cursor.moveToFirst()) {
                 val smallestBalance = cursor.getDouble(cursor.getColumnIndex("smallest_balance"))
+//                Log.e("Debug Repayment Strategy","Smallest Balance in DB:\n $smallestBalance")
                 return "RM ${String.format("%.2f", smallestBalance)}"
             }
         }

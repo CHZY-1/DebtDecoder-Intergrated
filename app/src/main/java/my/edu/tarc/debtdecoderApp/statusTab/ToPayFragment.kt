@@ -1,6 +1,6 @@
 package my.edu.tarc.debtdecoderApp.statusTab
 
-import my.edu.yyass.repaymentTab.LoanDatabaseHelper
+import my.edu.tarc.debtdecoderApp.repaymentTab.LoanDatabaseHelper
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log

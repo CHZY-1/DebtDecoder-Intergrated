@@ -1,6 +1,6 @@
 package my.edu.yyass.repaymentTab.individualTab
 
-import my.edu.yyass.repaymentTab.LoanDatabaseHelper
+import my.edu.tarc.debtdecoderApp.repaymentTab.LoanDatabaseHelper
 import android.app.AlertDialog
 import android.os.Bundle
 import android.text.InputType

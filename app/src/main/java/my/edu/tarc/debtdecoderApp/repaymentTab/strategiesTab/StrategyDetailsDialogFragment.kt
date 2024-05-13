@@ -1,16 +1,20 @@
 package my.edu.tarc.debtdecoderApp.repaymentTab.strategiesTab
 
-import my.edu.yyass.repaymentTab.LoanDatabaseHelper
+import my.edu.tarc.debtdecoderApp.repaymentTab.LoanDatabaseHelper
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import my.edu.tarc.debtdecoder.databinding.FragmentStrategyDetailsBinding
+import my.edu.tarc.debtdecoderApp.More.IncomeViewModel
 import my.edu.yyass.Loan
 import my.edu.tarc.debtdecoderApp.repaymentTab.LoanAdapter
 
@@ -19,6 +23,7 @@ class StrategyDetailsDialogFragment : DialogFragment() {
     private var _binding: FragmentStrategyDetailsBinding? = null
     private val binding get() = _binding!!
     private lateinit var loanAdapter: LoanAdapter
+    private lateinit var  incomeViewModel: IncomeViewModel
 
     companion object {
         fun newInstance(strategy: String): StrategyDetailsDialogFragment {
@@ -54,6 +59,13 @@ class StrategyDetailsDialogFragment : DialogFragment() {
         val strategy = arguments?.getString("strategyType") ?: return
         loanAdapter.strategyType = strategy
         loadLoans(strategy)
+
+        incomeViewModel = ViewModelProvider(requireActivity()).get(IncomeViewModel::class.java)
+        incomeViewModel.currentMonthIncome.observe(viewLifecycleOwner, Observer { income ->
+            Log.e("Check Income Value", "onViewCreated: $income")
+            loadLoans(strategy)
+            updateIncomeRecalculate(income.toDouble())
+        })
     }
 
     private fun setupRecyclerView() {
@@ -69,6 +81,10 @@ class StrategyDetailsDialogFragment : DialogFragment() {
         loanAdapter.strategyType = strategy
         loanAdapter.submitList(loans)
         loanAdapter.notifyDataSetChanged()
+    }
+
+    private fun updateIncomeRecalculate(income: Double){
+        loanAdapter.updateIncome(income)
     }
 
     private fun getLoansBasedOnStrategy(strategy: String): List<Loan> {

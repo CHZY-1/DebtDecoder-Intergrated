@@ -1,6 +1,6 @@
 package my.edu.tarc.debtdecoderApp.addLoansTab
 
-import my.edu.yyass.repaymentTab.LoanDatabaseHelper
+import my.edu.tarc.debtdecoderApp.repaymentTab.LoanDatabaseHelper
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater

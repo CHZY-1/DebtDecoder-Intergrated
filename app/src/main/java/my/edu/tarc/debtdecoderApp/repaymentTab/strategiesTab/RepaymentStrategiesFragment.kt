@@ -1,7 +1,8 @@
 package my.edu.tarc.debtdecoderApp.repaymentTab.strategiesTab
 
-import my.edu.yyass.repaymentTab.LoanDatabaseHelper
+import my.edu.tarc.debtdecoderApp.repaymentTab.LoanDatabaseHelper
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,6 +60,8 @@ class RepaymentStrategiesFragment : Fragment() {
         val highestInterestAvalanche = dbHelper.getHighestInterestBorrowed().toDouble()*100
         val smallestBalanceSnowball = dbHelper.getSmallestBalanceBorrowed()
         val nearestDueOwed = dbHelper.getNearestDueLent()
+
+//        Log.e("Debug Repayment Strategy","Smallest Balance:\n $smallestBalanceSnowball")
 
         binding.textNearestDueCustom.text = "Nearest Due: $nearestDueCustom"
         binding.textHighestInterestAvalanche.text = "Highest Interest: ${highestInterestAvalanche.toInt()}%"

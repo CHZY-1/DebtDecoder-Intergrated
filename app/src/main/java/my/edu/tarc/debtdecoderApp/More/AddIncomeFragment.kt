@@ -149,7 +149,7 @@ class AddIncomeFragment : Fragment() {
             clearFields()
 
             // Navigate back to the desired fragment
-            findNavController().navigate(R.id.action_addIncome_to_Income)
+            findNavController().popBackStack()
         }.addOnFailureListener { exception ->
             Toast.makeText(requireContext(), "Error: ${exception.message}", Toast.LENGTH_SHORT).show()
         }
