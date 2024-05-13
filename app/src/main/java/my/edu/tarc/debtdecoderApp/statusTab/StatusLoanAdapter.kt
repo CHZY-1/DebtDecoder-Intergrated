@@ -3,9 +3,9 @@ package my.edu.yyass.statusTab
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import my.edu.tarc.debtdecoder.R
+import my.edu.tarc.debtdecoder.databinding.StatusLoanItemBinding
 import my.edu.yyass.Loan
-import my.edu.yyass.R
-import my.edu.yyass.databinding.StatusLoanItemBinding
 import java.util.Locale
 
 class StatusLoanAdapter(private var loans: List<Loan>) : RecyclerView.Adapter<StatusLoanAdapter.LoanViewHolder>() {

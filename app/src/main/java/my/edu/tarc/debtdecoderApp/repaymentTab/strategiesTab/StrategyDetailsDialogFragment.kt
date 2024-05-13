@@ -1,4 +1,4 @@
-package my.edu.yyass.repaymentTab.strategiesTab
+package my.edu.tarc.debtdecoderApp.repaymentTab.strategiesTab
 
 import my.edu.yyass.repaymentTab.LoanDatabaseHelper
 import android.app.Dialog
@@ -10,9 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import my.edu.tarc.debtdecoder.databinding.FragmentStrategyDetailsBinding
 import my.edu.yyass.Loan
-import my.edu.yyass.databinding.FragmentStrategyDetailsBinding
-import my.edu.yyass.repaymentTab.LoanAdapter
+import my.edu.tarc.debtdecoderApp.repaymentTab.LoanAdapter
 
 class StrategyDetailsDialogFragment : DialogFragment() {
 

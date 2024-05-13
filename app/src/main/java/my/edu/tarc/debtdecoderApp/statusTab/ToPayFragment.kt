@@ -1,4 +1,4 @@
-package my.edu.yyass.statusTab
+package my.edu.tarc.debtdecoderApp.statusTab
 
 import my.edu.yyass.repaymentTab.LoanDatabaseHelper
 import android.graphics.Color
@@ -15,8 +15,10 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
+import my.edu.tarc.debtdecoder.databinding.FragmentToPayBinding
 import my.edu.yyass.Loan
-import my.edu.yyass.databinding.FragmentToPayBinding
+import my.edu.yyass.statusTab.CustomMarkerView
+import my.edu.yyass.statusTab.StatusLoanAdapter
 
 class ToPayFragment : Fragment() {
     private var _binding: FragmentToPayBinding? = null

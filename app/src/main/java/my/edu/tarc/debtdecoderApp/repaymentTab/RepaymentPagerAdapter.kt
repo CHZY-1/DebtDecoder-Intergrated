@@ -3,7 +3,7 @@ package my.edu.yyass.repaymentTab
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import my.edu.yyass.repaymentTab.individualTab.IndividualLoanFragment
-import my.edu.yyass.repaymentTab.strategiesTab.RepaymentStrategiesFragment
+import my.edu.tarc.debtdecoderApp.repaymentTab.strategiesTab.RepaymentStrategiesFragment
 
 class RepaymentPagerAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
     companion object {

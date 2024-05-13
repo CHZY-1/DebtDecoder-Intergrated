@@ -5,8 +5,9 @@ import com.github.mikephil.charting.components.MarkerView
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.utils.MPPointF
-import my.edu.yyass.R
-import my.edu.yyass.databinding.CustomMarkerViewBinding
+import my.edu.tarc.debtdecoder.R
+import my.edu.tarc.debtdecoder.databinding.CustomMarkerViewBinding
+import my.edu.tarc.debtdecoderApp.statusTab.ToPayFragment
 
 class CustomMarkerView(context: Context) : MarkerView(context, R.layout.custom_marker_view) {
     private val binding = CustomMarkerViewBinding.inflate(LayoutInflater.from(context), this, true)

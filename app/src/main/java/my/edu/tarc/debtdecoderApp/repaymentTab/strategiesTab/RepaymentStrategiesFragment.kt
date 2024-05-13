@@ -1,4 +1,4 @@
-package my.edu.yyass.repaymentTab.strategiesTab
+package my.edu.tarc.debtdecoderApp.repaymentTab.strategiesTab
 
 import my.edu.yyass.repaymentTab.LoanDatabaseHelper
 import android.os.Bundle
@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import my.edu.yyass.databinding.FragmentRepaymentStrategiesBinding
+import my.edu.tarc.debtdecoder.databinding.FragmentRepaymentStrategiesBinding
 
 class RepaymentStrategiesFragment : Fragment() {
     private lateinit var binding: FragmentRepaymentStrategiesBinding

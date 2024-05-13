@@ -1,13 +1,14 @@
-package my.edu.yyass.repaymentTab.individualTab
+package my.edu.tarc.debtdecoderApp.repaymentTab.individualTab
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
+import my.edu.tarc.debtdecoder.R
+import my.edu.tarc.debtdecoder.databinding.FragmentEditLoanDialogBinding
 import my.edu.yyass.Loan
-import my.edu.yyass.R
-import my.edu.yyass.databinding.FragmentEditLoanDialogBinding
+import my.edu.yyass.repaymentTab.individualTab.IndividualLoanFragment
 import java.util.Calendar
 
 class EditLoanDialogFragment(private val loan: Loan) : DialogFragment() {

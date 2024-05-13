@@ -1,4 +1,4 @@
-package my.edu.yyass.statusTab
+package my.edu.tarc.debtdecoderApp.statusTab
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
-import my.edu.yyass.databinding.FragmentStatusBinding
+import my.edu.tarc.debtdecoder.databinding.FragmentStatusBinding
+import my.edu.yyass.statusTab.StatusPagerAdapter
 
 class StatusFragment : Fragment() {
     private var _binding: FragmentStatusBinding? = null

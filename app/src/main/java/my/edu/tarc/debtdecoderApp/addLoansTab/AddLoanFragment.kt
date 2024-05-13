@@ -1,4 +1,4 @@
-package my.edu.yyass.addLoansTab
+package my.edu.tarc.debtdecoderApp.addLoansTab
 
 import my.edu.yyass.repaymentTab.LoanDatabaseHelper
 import android.app.DatePickerDialog
@@ -10,8 +10,8 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import my.edu.yyass.R
-import my.edu.yyass.databinding.FragmentAddLoanBinding
+import my.edu.tarc.debtdecoder.R
+import my.edu.tarc.debtdecoder.databinding.FragmentAddLoanBinding
 import java.util.Calendar
 import java.util.Locale
 

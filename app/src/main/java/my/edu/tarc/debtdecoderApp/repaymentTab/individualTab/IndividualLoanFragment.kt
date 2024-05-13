@@ -14,9 +14,10 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import my.edu.tarc.debtdecoder.R
+import my.edu.tarc.debtdecoder.databinding.FragmentIndividualLoanBinding
+import my.edu.tarc.debtdecoderApp.repaymentTab.individualTab.EditLoanDialogFragment
 import my.edu.yyass.Loan
-import my.edu.yyass.R
-import my.edu.yyass.databinding.FragmentIndividualLoanBinding
 
 class IndividualLoanFragment : Fragment() {
 

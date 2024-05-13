@@ -2,6 +2,8 @@ package my.edu.yyass.statusTab
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import my.edu.tarc.debtdecoderApp.statusTab.ToPayFragment
+import my.edu.tarc.debtdecoderApp.statusTab.ToReceiveFragment
 
 class StatusPagerAdapter(fragment: Fragment):FragmentStateAdapter(fragment) {
     companion object {

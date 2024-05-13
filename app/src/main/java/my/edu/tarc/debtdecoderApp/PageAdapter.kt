@@ -4,9 +4,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import my.edu.yyass.addLoansTab.AddLoanFragment
+import my.edu.tarc.debtdecoderApp.addLoansTab.AddLoanFragment
 import my.edu.yyass.repaymentTab.RepaymentFragment
-import my.edu.yyass.statusTab.StatusFragment
+import my.edu.tarc.debtdecoderApp.statusTab.StatusFragment
 
 class PageAdapter(fragmentManager:FragmentManager,lifecycle: Lifecycle):
     FragmentStateAdapter(fragmentManager, lifecycle) {
