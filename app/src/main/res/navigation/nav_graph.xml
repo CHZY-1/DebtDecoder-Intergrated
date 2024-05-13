@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+<!--    All the id must match exactly with the id in bottom navigation menu-->
+    <!--        set name and layout-->
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="my.edu.tarc.debtdecoderApp.DashboardFragment"
+        android:label="Dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/navigation_budget"
+        android:name="my.edu.tarc.debtdecoderApp.BudgetFragment"
+        android:label="Budget"
+        tools:layout="@layout/fragment_budget" />
+
+<!--    Expense Module-->
+    <fragment
+        android:id="@+id/navigation_expense"
+        android:name="com.example.expenses_and_budget_mobileassignment.expenses.ExpensesFragment"
+        android:label="Expenses"
+        tools:layout="@layout/fragment_expenses" >
+        <action
+            android:id="@+id/action_expensesTimelineFragment_to_addExpenseFragment"
+            app:destination="@id/addExpenseFragment" />
+        <action
+            android:id="@+id/action_navigation_expense_to_editExpensesListingFragment"
+            app:destination="@id/editExpensesListingFragment" />
+        <action
+            android:id="@+id/action_navigation_expense_to_displayExpenseCategoriesFragment"
+            app:destination="@id/displayExpenseCategoriesFragment" />
+        <action
+            android:id="@+id/action_navigation_expense_to_insightMonthlyExpensesFragment"
+            app:destination="@id/insightMonthlyExpensesFragment" />
+    </fragment>
+
+    <!-- Add an expense -->
+    <fragment
+        android:id="@+id/addExpenseFragment"
+        android:name="com.example.expenses_and_budget_mobileassignment.expenses.AddExpenseFragment"
+        android:label="fragment_add_expense"
+        tools:layout="@layout/fragment_add_expense" />
+
+    <fragment
+        android:id="@+id/editExpensesListingFragment"
+        android:name="com.example.expenses_and_budget_mobileassignment.expenses.EditExpensesListingFragment"
+        android:label="EditExpensesListingFragment" >
+        <action
+            android:id="@+id/action_editExpensesListingFragment_to_trackExpenseFragment"
+            app:destination="@id/trackExpenseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/trackExpenseFragment"
+        android:name="com.example.expenses_and_budget_mobileassignment.expenses.TrackExpenseFragment"
+        android:label="TrackExpenseFragment" />
+    <fragment
+        android:id="@+id/expensesTimelineFragment"
+        android:name="com.example.expenses_and_budget_mobileassignment.expenses.ExpensesTimelineFragment"
+        android:label="ExpensesTimelineFragment" />
+    <fragment
+        android:id="@+id/displayExpenseCategoriesFragment"
+        android:name="com.example.expenses_and_budget_mobileassignment.expenses.DisplayExpenseCategoriesFragment"
+        android:label="DisplayExpenseCategoriesFragment" />
+    <fragment
+        android:id="@+id/insightMonthlyExpensesFragment"
+        android:name="com.example.expenses_and_budget_mobileassignment.expenses.InsightMonthlyExpensesFragment"
+        android:label="InsightMonthlyExpensesFragment" />
+
+
+
+<!--    Debt Module-->
+    <fragment
+        android:id="@+id/navigation_debt"
+        android:name="my.edu.tarc.debtdecoderApp.DebtFragment"
+        android:label="Debt"
+        tools:layout="@layout/fragment_debt"/>
+
+    <fragment
+        android:id="@+id/navigation_more"
+        android:name="com.example.expenses_and_budget_mobileassignment.MoreFragment"
+        android:label="More"
+        tools:layout="@layout/fragment_more">
+        <action
+            android:id="@+id/action_more_to_myAcc"
+            app:destination="@id/myAccount" />
+        <action
+            android:id="@+id/action_more_to_income"
+            app:destination="@id/income" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/income"
+        android:name="com.example.expenses_and_budget_mobileassignment.More.IncomeFragment"
+        android:label="Income"
+        tools:layout="@layout/fragment_income">
+        <action
+            android:id="@+id/action_income_to_addIncome"
+            app:destination="@id/addIncome" />
+        <action
+            android:id="@+id/action_income_to_more"
+            app:destination="@+id/navigation_more"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/addIncome"
+        android:name="com.example.expenses_and_budget_mobileassignment.More.AddIncomeFragment"
+        android:label="AddIncome"
+        tools:layout="@layout/fragment_add_income">
+        <action
+            android:id="@+id/action_addIncome_to_Income"
+            app:destination="@id/income" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/myAccount"
+        android:name="com.example.expenses_and_budget_mobileassignment.More.MyAccountFragment"
+        android:label="myAccount">
+        <action
+            android:id="@+id/action_myAcc_to_login"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_myAcc_to_more"
+            app:destination="@id/navigation_more" />
+    </fragment>
+
+    <!-- Login Fragment -->
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="my.edu.tarc.debtdecoder.LoginFragment"
+        android:label="Log In">
+        <action
+            android:id="@+id/action_login_to_signup"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_login_to_forgot_password"
+            app:destination="@id/forgotPassFragment" />
+        <!-- Action to go to the main app after login success -->
+        <action
+            android:id="@+id/action_login_to_navigationdash"
+            app:destination="@id/navigation_dashboard" />
+    </fragment>
+
+    <!-- Sign Up Fragment -->
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.expenses_and_budget_mobileassignment.SignUpFragment"
+        android:label="Sign Up">
+        <action
+            android:id="@+id/action_signup_to_preferences1"
+            app:destination="@id/preferences1Fragment" />
+        <action
+            android:id="@+id/action_signup_to_login"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
+    <!-- Forgot Password Fragment -->
+    <fragment
+        android:id="@+id/forgotPassFragment"
+        android:name="com.example.expenses_and_budget_mobileassignment.ForgotPassFragment"
+        android:label="Forgot Password">
+        <action
+            android:id="@+id/action_forgot_to_login"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
+    <!-- Preferences 1 Fragment -->
+    <fragment
+        android:id="@+id/preferences1Fragment"
+        android:name="com.example.expenses_and_budget_mobileassignment.Preferences1Fragment"
+        android:label="Preferences 1">
+        <action
+            android:id="@+id/action_preferences1_to_preferences2"
+            app:destination="@id/preferences2Fragment" />
+    </fragment>
+
+    <!-- Preferences 2 Fragment -->
+    <fragment
+        android:id="@+id/preferences2Fragment"
+        android:name="com.example.expenses_and_budget_mobileassignment.Preferences2Fragment"
+        android:label="Preferences 2">
+        <action
+            android:id="@+id/action_preferences2_to_preferences3"
+            app:destination="@id/preferences3Fragment" />
+    </fragment>
+
+    <!-- Preferences 3 Fragment -->
+    <fragment
+        android:id="@+id/preferences3Fragment"
+        android:name="com.example.expenses_and_budget_mobileassignment.Preferences3Fragment"
+        android:label="Preferences 3">
+        <action
+            android:id="@+id/action_preferences3_to_login"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
+</navigation>

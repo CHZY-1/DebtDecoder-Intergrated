@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/black">
+
+    <!-- Personal Info Header -->
+    <TextView
+        android:id="@+id/tvPersonalInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PERSONAL INFO"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Profile Picture Row -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/profilePicLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvPersonalInfo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp">
+
+        <!-- Profile Picture Icon -->
+        <ImageView
+            android:id="@+id/profilePic"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_account"
+            android:contentDescription="Profile Picture"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/profilePicArrow"/>
+
+        <!-- Profile Picture Text -->
+        <TextView
+            android:id="@+id/tvProfilePicLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profile picture"
+            android:textColor="@android:color/white"
+            app:layout_constraintTop_toTopOf="@id/profilePic"
+            app:layout_constraintBottom_toBottomOf="@id/profilePic"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"/>
+
+        <!-- Navigation Arrow Icon -->
+        <ImageView
+            android:id="@+id/profilePicArrow"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/arrow_right"
+            android:contentDescription="Navigation Arrow"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintTop_toBottomOf="@id/profilePicLayout"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@android:color/white" />
+
+    <!-- Nickname and Age -->
+    <TextView
+        android:id="@+id/tvNickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Nickname"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/profilePicLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="20dp"/>
+
+    <EditText
+        android:id="@+id/etNicknameValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toTopOf="@id/tvNickname"
+        app:layout_constraintBottom_toBottomOf="@id/tvNickname"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <View
+        android:id="@+id/lineNick"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/tvNickname"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@android:color/white" />
+
+    <TextView
+        android:id="@+id/tvAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Age"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/lineNick"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/etAgeValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toTopOf="@id/tvAge"
+        app:layout_constraintBottom_toBottomOf="@id/tvAge"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <View
+        android:id="@+id/lineAge"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/tvAge"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@android:color/white" />
+
+    <!-- Change Password Section -->
+    <TextView
+        android:id="@+id/tvChangePasswordHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Password"
+        android:textSize="18dp"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/lineAge"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/tvPasswordInstructions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Please enter all required details"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/tvChangePasswordHeader"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="10dp"/>
+
+    <!-- Password Fields -->
+    <EditText
+        android:id="@+id/etOldPassword"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:hint="Old Password"
+        android:layout_marginTop="10dp"
+        android:inputType="textPassword"
+        android:textColorHint="@color/inactive_color"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/tvPasswordInstructions"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="10dp"
+        android:background="@null"
+        />
+
+    <View
+        android:id="@+id/linePass"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@id/etOldPassword"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/inactive_color" />
+
+    <EditText
+        android:id="@+id/etNewPassword"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:hint="New Password"
+        android:background="@null"
+        android:inputType="textPassword"
+        android:textColorHint="@color/inactive_color"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/linePass"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/etConfirmPassword"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:hint="Confirm Password"
+        android:background="@null"
+        android:inputType="textPassword"
+        android:textColorHint="@color/inactive_color"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/etNewPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Submit Button -->
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:textColor="@android:color/white"
+        app:backgroundTint="#000000"
+        app:layout_constraintTop_toBottomOf="@id/etConfirmPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp"
+        app:strokeColor="#49EB59"
+        app:strokeWidth="1dp"
+        />
+
+    <!-- Delete Account Button -->
+    <TextView
+        android:id="@+id/tvDeleteAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete account"
+        android:textColor="@android:color/holo_red_dark"
+        android:layout_marginTop="5dp"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/btnSubmit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="10dp"/>
+
+    <!-- Delete Account Instructions -->
+    <TextView
+        android:id="@+id/tvDeleteAccountInstructions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="All data will be deleted permanently"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@id/tvDeleteAccount"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

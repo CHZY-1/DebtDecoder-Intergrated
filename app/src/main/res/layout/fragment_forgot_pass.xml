@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#090909">
+
+    <TextView
+        android:id="@+id/backLI"
+        android:layout_width="94dp"
+        android:layout_height="26dp"
+        android:text="Back to Login"
+        android:textColor="#FFFCFC"
+        app:layout_constraintBottom_toBottomOf="@+id/imgBack"
+        app:layout_constraintStart_toEndOf="@+id/imgBack"
+        app:layout_constraintTop_toTopOf="@+id/imgBack" />
+
+    <ImageView
+        android:id="@+id/imgBack"
+        android:layout_width="33dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnNext"
+        app:srcCompat="@drawable/backtoic_removebg_preview" />
+
+    <TextView
+        android:id="@+id/txtEnTel"
+        android:layout_width="299dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="36dp"
+        android:text="Please enter your phone number below:"
+        android:textColor="#FBFAFA"
+        android:textColorHint="#8F3E3E"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtFgHead" />
+
+    <TextView
+        android:id="@+id/txtFgHead"
+        android:layout_width="295dp"
+        android:layout_height="133dp"
+        android:layout_marginTop="24dp"
+        android:text="Forgot Password"
+        android:textAlignment="inherit"
+        android:textColor="#FBF9F9"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgForgot" />
+
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="48dp"
+        android:text="Next"
+        android:textColor="@color/white"
+        app:backgroundTint="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtFEmail"
+        app:strokeColor="#49EB59"
+        app:strokeWidth="1dp" />
+
+    <EditText
+        android:id="@+id/edtFEmail"
+        android:layout_width="296dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:textColor="#FFFFFF"
+        android:hint="Enter Email Address"
+        android:inputType="textEmailAddress"
+        android:textColorHint="#989696"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEnTel" />
+
+    <ImageView
+        android:id="@+id/imgForgot"
+        android:layout_width="135dp"
+        android:layout_height="99dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/forgotpassic_removebg" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

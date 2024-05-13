@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1c1c2b">
+
+    <!-- Horizontal Guideline for Title -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_title"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintGuide_begin="38dp" />
+
+    <!-- Vertical Guideline for Edit Button -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical_edit"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintGuide_end="510dp" />
+
+    <!-- Spendings Chart Title -->
+    <TextView
+        android:id="@+id/tv_spendings_chart_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/expense_timeline_title"
+        android:textColor="#FFFFFF"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline_horizontal_title" />
+
+    <!-- Bar Chart Section with Aspect Ratio -->
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/bar_chart_expenses"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#222233"
+        app:layout_constraintDimensionRatio="16:9"
+        app:layout_constraintTop_toBottomOf="@id/tv_spendings_chart_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btn_add_expense"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Add Expense Button -->
+    <Button
+        android:id="@+id/btn_add_expense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add an Expense"
+        android:textColor="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@id/bar_chart_expenses"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Past 7 Days Header -->
+    <TextView
+        android:id="@+id/label_past_7_days"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Past 7 days"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:paddingBottom="8dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_add_expense"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="16dp" />
+
+    <!-- RecyclerView for All Expenses -->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_all_expenses"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="#444455"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_past_7_days" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

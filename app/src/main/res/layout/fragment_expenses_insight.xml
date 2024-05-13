@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="4dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_chart_categories"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/shape_rounded_bg_expense"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="true"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/iv_chart_categories"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/icon_pie_chart" />
+
+
+        <TextView
+            android:id="@+id/tv_insight_title_categories"
+            style="@style/InsightTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="16dp"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:text="Expense Categories"
+            app:layout_constraintEnd_toStartOf="@+id/iv_arrow_navigate_categories"
+            app:layout_constraintStart_toEndOf="@+id/iv_chart_categories"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_insight_date_categories"
+            style="@style/InsightTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Date 1 - Date 2"
+            app:layout_constraintEnd_toStartOf="@+id/iv_arrow_navigate_categories"
+            app:layout_constraintStart_toEndOf="@+id/iv_chart_categories"
+            app:layout_constraintTop_toBottomOf="@+id/tv_insight_title_categories" />
+
+        <ImageView
+            android:id="@+id/iv_arrow_navigate_categories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/icon_arrow_right_bright" />
+
+        <LinearLayout
+            android:id="@+id/linear_layout_insight_categories"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:padding="12dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_insight_date_categories">
+
+            <TextView
+                android:id="@+id/tv_insight_categories1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/InsightTextStyle"
+                android:visibility="gone"
+                tools:text="Total Spending : RM1000"/>
+
+            <TextView
+                android:id="@+id/tv_insight_categories2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/InsightTextStyle"
+                android:visibility="gone"
+                tools:text="Top Spending Categories" />
+
+            <TextView
+                android:id="@+id/tv_insight_categories3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/InsightTextStyle"
+                android:visibility="gone"
+                tools:text="TextView"/>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_chart_monthly_expense"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@drawable/shape_rounded_bg_expense"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl_chart_categories">
+
+        <ImageView
+            android:id="@+id/iv_chart_monthly_expense"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/icon_line_chart" />
+
+
+        <TextView
+            android:id="@+id/tv_insight_title_monthly_expense"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="16dp"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            style="@style/InsightTextStyle"
+            android:text="Expense Categories"
+            app:layout_constraintEnd_toStartOf="@+id/iv_arrow_navigate_monthly_expense"
+            app:layout_constraintStart_toEndOf="@+id/iv_chart_monthly_expense"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_insight_date_monthly_expense"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            style="@style/InsightTextStyle"
+            android:text="Date 1 - Date 2"
+            app:layout_constraintEnd_toStartOf="@+id/iv_arrow_navigate_monthly_expense"
+            app:layout_constraintStart_toEndOf="@+id/iv_chart_monthly_expense"
+            app:layout_constraintTop_toBottomOf="@+id/tv_insight_title_monthly_expense" />
+
+        <ImageView
+            android:id="@+id/iv_arrow_navigate_monthly_expense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/icon_arrow_right_bright" />
+
+        <LinearLayout
+            android:id="@+id/linear_layout_insight_monthly_expense"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            android:padding="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_insight_date_monthly_expense">
+
+            <TextView
+                android:id="@+id/tv_insight_monthly_expense1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/InsightTextStyle"
+                android:visibility="gone"
+                tools:text="Total Expenses : RM1000.00" />
+
+            <TextView
+                android:id="@+id/tv_insight_monthly_expense2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/InsightTextStyle"
+                android:visibility="gone"
+                tools:text="Average Daily Expenses This Month : RM1000.00" />
+
+            <TextView
+                android:id="@+id/tv_insight_monthly_expense3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/InsightTextStyle"
+                android:visibility="gone"
+                tools:text="Change From Previous Month : -RM1000.00 (50.00%)" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">DebtDecoder</string>
+    <string name="bot_nav_dashboard">Dashboard</string>
+    <string name="bot_nav_budget">Budget</string>
+    <string name="bot_nav_expenses">Expenses</string>
+    <string name="bot_nav_debt">Debt</string>
+    <string name="bot_nav_more">More</string>
+    <string name="module_title">%s</string>
+    <string name="add_expense_title">Add an Expense</string>
+    <string name="add_expense_payment_name">Payment Method</string>
+    <string name="hello_blank_fragment">temporary text holder</string>
+    <string name="default_expense_category_name">Restaurant</string>
+    <string name="expenses_for_date">Expenses for %1$s</string>
+    <string name="total_expense">Total: RM%1$.2f</string>
+    <string name="expense_timeline_title">Past Week Spendings</string>
+    <string name="category_icon">Category Icon For expense</string>
+    <string name="line_chart_monthly_expenses_title">Monthly Expense Comparison: Current vs Previous Month</string>
+
+    <string-array name="module_titles">
+        <item>DASHBOARD</item>
+        <item>DEBT</item>
+        <item>BUDGET</item>
+        <item>EXPENSES</item>
+        <item>MORE</item>
+    </string-array>
+
+    <string-array name="add_expense_recurrent">
+        <item>Week</item>
+        <item>Month</item>
+    </string-array>
+
+    <string-array name="add_expense_payment_method">
+        <item>Cash</item>
+        <item>E Wallet</item>
+        <item>Credit/Debit Card</item>
+        <item>Online Banking</item>
+    </string-array>
+</resources>

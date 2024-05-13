@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUpFragment"
+    android:background="#070707">
+
+    <TextView
+        android:id="@+id/txtHeader"
+        android:layout_width="206dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="Sign Up"
+        android:textColor="#FBFBFB"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="Full Name"
+        android:textColor="#FBF9F9"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtHeader" />
+
+    <EditText
+        android:id="@+id/edtName"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:ems="10"
+        android:hint="Name..."
+        android:inputType="text"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#C3B6B6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtName" />
+
+    <TextView
+        android:id="@+id/txtEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="Email"
+        android:textColor="#FDFCFC"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/edtName"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/edtEmail"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:ems="10"
+        android:hint="Email address..."
+        android:inputType="textEmailAddress"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#AFADAD"
+        app:layout_constraintTop_toBottomOf="@+id/txtEmail"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/txtAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="Age"
+        android:textColor="#FBF9F9"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/edtEmail"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/edtAge"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:ems="10"
+        android:hint="Age..."
+        android:inputType="text"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#C3B6B6"
+        app:layout_constraintTop_toBottomOf="@id/txtAge"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtIncome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="Income"
+        android:textColor="#FBF9F9"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/edtAge"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/edtIncome"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:ems="10"
+        android:hint="Monthly Income..."
+        android:inputType="text"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#C3B6B6"
+        app:layout_constraintTop_toBottomOf="@id/txtIncome"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="Password"
+        android:textColor="#FFFDFD"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/edtIncome"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtLayoutPassword"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:textColorHint="#C3B6B6"
+        app:endIconMode="password_toggle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtPass">
+
+        <EditText
+            android:id="@+id/edtPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="Password"
+            android:textColor="#FFFFFF" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/txtConPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="Confirm Password"
+        android:textColor="#FAF8F8"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/txtLayoutPassword"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtLayoutConfirmPassword"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:textColorHint="#C3B6B6"
+        app:endIconMode="password_toggle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtConPass">
+
+        <EditText
+            android:id="@+id/edtConPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="Confirm Password"
+            android:textColor="#FFFFFF" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="I agree to the "
+        android:textColor="#FBFAFA"
+        app:layout_constraintTop_toBottomOf="@id/txtLayoutConfirmPassword"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtTerm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Terms of User"
+        android:textColor="#ACAAAA"
+        android:textSize="16sp"
+        app:layout_constraintTop_toTopOf="@id/checkBox"
+        app:layout_constraintBottom_toBottomOf="@id/checkBox"
+        app:layout_constraintStart_toEndOf="@id/checkBox"/>
+
+    <Button
+        android:id="@+id/btnSU"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="15dp"
+        android:text="Sign Up"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        app:backgroundTint="#000000"
+        app:strokeColor="#49EB59"
+        app:strokeWidth="1dp"
+        app:layout_constraintTop_toBottomOf="@id/checkBox"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtSI"
+        android:layout_width="107dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="120dp"
+        android:text="Sign In"
+        android:textAlignment="center"
+        android:textColor="#FAF7F7"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="@id/btnSU"
+        app:layout_constraintBottom_toBottomOf="@id/btnSU"
+        app:layout_constraintStart_toEndOf="@id/btnSU"/>
+
+    <ImageView
+        android:id="@+id/imgSI"
+        android:layout_width="28dp"
+        android:layout_height="29dp"
+        app:srcCompat="@drawable/arrowrightic_removebg_preview"
+        app:layout_constraintStart_toEndOf="@id/txtSI"
+        app:layout_constraintTop_toTopOf="@id/txtSI"
+        app:layout_constraintBottom_toBottomOf="@id/txtSI" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

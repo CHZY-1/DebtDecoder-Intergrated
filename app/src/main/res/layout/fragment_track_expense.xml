@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Month and Year Spinners -->
+    <Spinner
+        android:id="@+id/expense_spinner_month"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toStartOf="@id/expense_spinner_year"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/expense_spinner_year"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/expense_spinner_month"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Calendar Grid -->
+    <GridLayout
+        android:id="@+id/expense_calendar_grid"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:columnCount="7"
+        android:rowCount="7"
+        app:layout_constraintTop_toBottomOf="@id/expense_spinner_month"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:clipToPadding="false" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#090909">
+
+    <TextView
+        android:id="@+id/textViewHeader"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="What best describes your current financial priority?"
+        android:textSize="24sp"
+        android:textColor="#FFFFFF"
+        android:textAlignment="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="120dp"/>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutPriority"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/textViewHeader"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"
+        android:padding="16dp">
+
+        <!-- Custom layout for Emergency Fund and Savings -->
+        <LinearLayout
+            android:id="@+id/layoutSavings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="8dp"
+            android:elevation="4dp">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_savings"
+                android:contentDescription="Emergency Fund and Savings"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Building a solid emergency fund and savings"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:layout_gravity="center_vertical"
+                android:paddingStart="16dp"/>
+        </LinearLayout>
+
+        <!-- Custom layout for Paying Off Student Loans -->
+        <LinearLayout
+            android:id="@+id/layoutStudentLoans"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="8dp"
+            android:elevation="4dp">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_payoff"
+                android:contentDescription="Student Loans"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Paying off loans as quickly as possible"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:layout_gravity="center_vertical"
+                android:paddingStart="16dp"/>
+        </LinearLayout>
+
+        <!-- Custom layout for Balance between Debt and Saving -->
+        <LinearLayout
+            android:id="@+id/layoutBalance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="8dp"
+            android:elevation="4dp">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/balance"
+                android:contentDescription="Debt and Saving Balance"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Striking a balance between paying debt and saving"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:layout_gravity="center_vertical"
+                android:paddingStart="16dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonNext1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        app:layout_constraintTop_toBottomOf="@id/linearLayoutPriority"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginTop="32dp"
+        app:backgroundTint="#1F1F1F"
+        android:textColor="#FFFFFF"
+        app:cornerRadius="8dp"
+        android:padding="12dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

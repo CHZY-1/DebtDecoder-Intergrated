@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#444466"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/iv_expense_category_icon"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:contentDescription="@string/category_icon"
+        android:src="@drawable/icon_close_button_bright"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/ll_details"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:orientation="horizontal"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_expense_category_icon"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_expense_category_name"
+            android:layout_weight="80"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            tools:text="Category"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_expense_category_percentage"
+            android:layout_weight="30"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            tools:text="60.00%"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_expense_category_sum_amount"
+            android:layout_weight="40"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            tools:text="RM 10000.00"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
