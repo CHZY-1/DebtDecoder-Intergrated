@@ -76,7 +76,7 @@ class ExpensesTimelineFragment : Fragment() {
         val user = FirebaseAuth.getInstance().currentUser
         user?.let { firebaseUser ->
             val userId = firebaseUser.uid
-            Log.d("UserID", "User ID: $userId")
+//            Log.d("UserID", "User ID: $userId")
 
             expensesFirebaseHelper.getExpensesForLastDays(userId, 7) { expenses ->
                 if (isAdded && _binding != null) {
