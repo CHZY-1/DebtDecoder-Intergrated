@@ -15,6 +15,41 @@
     <string name="expense_timeline_title">Past Week Spendings</string>
     <string name="category_icon">Category Icon For expense</string>
     <string name="line_chart_monthly_expenses_title">Monthly Expense Comparison: Current vs Previous Month</string>
+    //YY Strings
+    <string name="loan_details_title">Loan Details</string>
+    <string name="category">CATEGORY</string>
+    <string name="creditor">CREDITOR</string>
+    <string name="enter_loan_name">Enter Loan Name</string>
+    <string name="amount">AMOUNT</string>
+    <string name="enter_loan_amount">Enter Loan Amount</string>
+    <string name="enter_interest_amount">Enter Interest Amount</string>
+    <string name="maturity">MATURITY</string>
+    <string name="interest">INTEREST</string>
+    <string name="loan_name">LOAN NAME</string>
+    <string name="enter_maturity_date">Enter Maturity Date</string>
+    <string name="lend">LEND</string>
+    <string name="borrow">BORROW</string>
+    <string name="strategy_advice">Debt Repayment Strategies:</string>
+    <string name="enter_creditor_name">Enter Creditor Name</string>
+    <string name="to_pay_debts">To Pay Debts :</string>
+    <string name="to_pay_overview">To Pay Overview :</string>
+    <string name="to_receive_overview">To Receive Overview:</string>
+    <string name="to_receive_debts">To Receive Debts:</string>
+    <string name="summary">Summary:</string>
+    <string name="all_your_debts">All Your Debts:</string>
+    <string-array name="category_types">
+        <item>Personal Loan</item>
+        <item>Car Loan</item>
+        <item>Student Loan</item>
+        <item>House Loan</item>
+        <item>Others</item>
+    </string-array>
+    <string-array name="loan_options">
+        <item>Loan from Robert</item>
+        <item>Car Loan</item>
+        <item>Home Mortgage</item>
+    </string-array>
+    // YY Strings End
 
     <string-array name="module_titles">
         <item>DASHBOARD</item>
