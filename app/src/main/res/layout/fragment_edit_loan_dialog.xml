@@ -1,0 +1,86 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@color/cardBlue">
+
+    <!-- Loan Name -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Loan Name"
+        android:textColor="@color/white"
+        style="@style/normalText"/>
+    <EditText
+        android:id="@+id/editTextLoanName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Loan Name"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/inputLineGold"/>
+
+    <!-- Amount -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Amount"
+        android:textColor="@color/white"
+        style="@style/normalText"/>
+    <EditText
+        android:id="@+id/editTextLoanAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:hint="Amount"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/inputLineGold"/>
+
+    <!-- Interest Rate -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Interest Rate (%)"
+        android:textColor="@color/white"
+        style="@style/normalText"/>
+    <EditText
+        android:id="@+id/editTextLoanInterest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:hint="Interest Rate (%)"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/inputLineGold"/>
+
+    <!-- Maturity Date -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Maturity Date"
+        android:textColor="@color/white"
+        style="@style/normalText"/>
+
+    <Button
+        android:id="@+id/editTextLoanMaturity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Maturity Date"
+        android:textAllCaps="false"
+        android:backgroundTint="#1A175B"/>
+
+    <!-- Amount Paid -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Amount Paid"
+        android:textColor="@color/white"
+        style="@style/normalText"/>
+    <EditText
+        android:id="@+id/editTextAmountPaid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:hint="Amount Paid"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/inputLineGold"/>
+</LinearLayout>

@@ -1,0 +1,357 @@
+<!-- Layout file for the individual loan repayment details -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        tools:context=".repaymentTab.individualTab.IndividualLoanFragment"
+        android:background="@color/black">
+
+        <TextView
+            android:id="@+id/individualLoanPageTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loan_details_title"
+            android:textSize="30sp"
+            android:textStyle='bold'
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            style="@style/TitleStyle"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/loanTypeRadioCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/CardStyleYY"
+            app:layout_constraintTop_toBottomOf="@id/individualLoanPageTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <RadioGroup
+                android:id="@+id/loanTypeRadioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:padding="16dp">
+
+                <RadioButton
+                    android:id="@+id/radioBorrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Borrow"
+                    style="@style/normalText"
+                    android:paddingRight="32dp"
+                    android:textAppearance="?attr/textAppearanceBody1"/>
+
+                <RadioButton
+                    android:id="@+id/radioLend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lend"
+                    style="@style/normalText"
+                    android:textAppearance="?attr/textAppearanceBody1"/>
+            </RadioGroup>
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <!-- Loan Selection Dropdown within a MaterialCardView -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardLoanSelection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/CardStyleYY"
+            app:cardBackgroundColor="#87ceeb"
+            app:layout_constraintTop_toBottomOf="@id/loanTypeRadioCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <Spinner
+                android:id="@+id/loanSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:entries="@array/loan_options"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Loan Details Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/loanDetailsCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/cardLoanSelection"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/CardStyleYY">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Loan Title and Progress Indicator -->
+                <TextView
+                    android:id="@+id/loanTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="[Placeholder]"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textStyle="bold"
+                    style="@style/TitleStyle"
+                    android:layout_gravity="center"/>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <ProgressBar
+                        android:id="@+id/loanProgress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:progressDrawable="@drawable/custom_progress_bar" />
+
+                    <TextView
+                        android:id="@+id/progressText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:text="0%"
+                        android:textStyle="bold"
+                        android:padding="8dp"
+                        android:textColor="@android:color/white" />
+
+                    <TextView
+                        android:id="@+id/remainingText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|center_vertical"
+                        android:text="100%"
+                        android:textStyle="bold"
+                        android:padding="8dp"
+                        android:textColor="@android:color/white" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:layout_marginTop="16dp">
+
+                    <!-- Loan Details Section -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Loan Details"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:layout_marginBottom="8dp"
+                        style="@style/normalText"/>
+
+                    <!-- Category -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            style="@style/normalText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Category:"/>
+                        <TextView
+                            android:id="@+id/categoryValue"
+                            style="@style/normalText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:text="Personal Loan"/>
+                    </LinearLayout>
+
+                    <!-- Creditor -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            style="@style/normalText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Creditor:"/>
+                        <TextView
+                            android:id="@+id/creditorValue"
+                            style="@style/normalText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:text="Robert Jr"/>
+                    </LinearLayout>
+
+                    <!-- Amount -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            style="@style/normalText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Amount:"/>
+                        <TextView
+                            android:id="@+id/amountValue"
+                            style="@style/normalText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:text="RM15000"/>
+                    </LinearLayout>
+
+                    <!-- Interest Rate -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            style="@style/normalText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Interest Rate:"/>
+                        <TextView
+                            android:id="@+id/interestRateValue"
+                            style="@style/normalText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:text="5.0%"/>
+                    </LinearLayout>
+
+                    <!-- Maturity -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            style="@style/normalText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Maturity:"/>
+                        <TextView
+                            android:id="@+id/maturityValue"
+                            style="@style/normalText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:text="1/1/2025"/>
+                    </LinearLayout>
+
+                    <!-- Repayment Details Section -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Repayment Details"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="8dp"
+                        style="@style/normalText"/>
+
+                    <!-- Total Repayment -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            style="@style/normalText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Repayment:"/>
+                        <TextView
+                            android:id="@+id/totalRepaymentAmount"
+                            style="@style/normalText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:text="RM15,000"/>
+                    </LinearLayout>
+
+                    <!-- Remaining Amount -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            style="@style/normalText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Remaining:"/>
+                        <TextView
+                            android:id="@+id/remainingAmount"
+                            style="@style/normalText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:text="RM12,750"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+                <!-- Action Buttons -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="end"
+                    android:layout_marginTop="16dp">
+
+                    <Button
+                        android:id="@+id/editLoanButton"
+                        style="@style/RedButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Edit"/>
+
+                    <Button
+                        android:id="@+id/payLoanButton"
+                        style="@style/GreenButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pay!"
+                        android:layout_marginStart="16dp"/>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <Button
+            android:id="@+id/deleteLoanButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Delete Loan"
+            style="@style/RedButtonStyle"
+            app:layout_constraintTop_toBottomOf="@id/loanDetailsCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="16dp"
+            android:gravity="center"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:background="@color/black"
+        tools:context=".addLoansTab.AddLoanFragment">
+
+        <TextView
+            android:id="@+id/titleLoanDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loan_details_title"
+            android:textSize="30sp"
+            android:textStyle='bold'
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            style="@style/TitleStyle"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardLoanCategory"
+            style="@style/CardStyleYY"
+            app:layout_constraintTop_toBottomOf="@+id/titleLoanDetails"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/loanCategoryTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/category"
+                    style="@style/normalText"/>
+
+                <AutoCompleteTextView
+                    android:id="@+id/loanCategoryAutocomplete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:hint="Select Category"
+                    android:textColorHint="@color/hintColor"
+                    android:backgroundTint="@color/inputLineGold"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Card for Creditor -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardCreditor"
+            style="@style/CardStyleYY"
+            app:layout_constraintTop_toBottomOf="@+id/cardLoanCategory"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/creditorTitleInput"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/creditor"
+                    style="@style/normalText"/>
+
+                <!-- Replaced EditText with AutoCompleteTextView -->
+                <AutoCompleteTextView
+                    android:id="@+id/loanCreditorAutoComplete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:hint="@string/enter_creditor_name"
+                    android:textColorHint="@color/hintColor"
+                    android:backgroundTint="@color/inputLineGold"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Card for Loan Name -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardLoanName"
+            style="@style/CardStyleYY"
+            app:layout_constraintTop_toBottomOf="@+id/cardCreditor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/loanNameTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/loan_name"
+                    style="@style/normalText"/>
+
+                <EditText
+                    android:id="@+id/loanNameTextInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:hint="@string/enter_loan_name"
+                    android:textColorHint="@color/hintColor"
+                    android:backgroundTint="@color/inputLineGold"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardAmount"
+            style="@style/CardStyleYY"
+            app:layout_constraintTop_toBottomOf="@+id/cardLoanName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/amountTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/amount"
+                    style="@style/normalText"/>
+
+                <EditText
+                    android:id="@+id/amountNumberInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:hint="@string/enter_loan_amount"
+                    android:textColorHint="@color/hintColor"
+                    android:backgroundTint="@color/inputLineGold"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardInterest"
+            style="@style/CardStyleYY"
+            app:layout_constraintTop_toBottomOf="@+id/cardAmount"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/interestTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/interest"
+                    style="@style/normalText"/>
+
+                <EditText
+                    android:id="@+id/interestNumberInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:hint="@string/enter_interest_amount"
+                    android:textColorHint="@color/hintColor"
+                    android:backgroundTint="@color/inputLineGold"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+<!--        <com.google.android.material.card.MaterialCardView-->
+<!--            android:id="@+id/cardMaturityDate"-->
+<!--            style="@style/CardStyleYY"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/cardInterest"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical"-->
+<!--                android:padding="16dp">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/maturityTitle"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/maturity"-->
+<!--                    style="@style/LoanDetailTitle"/>-->
+
+<!--                <EditText-->
+<!--                    android:id="@+id/maturityDateStringInput"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:inputType="date"-->
+<!--                    android:hint="@string/enter_maturity_date" />-->
+<!--            </LinearLayout>-->
+<!--        </com.google.android.material.card.MaterialCardView>-->
+
+        <!-- Card for Maturity Date with a Button to trigger DatePickerDialog -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardMaturityDate"
+            style="@style/CardStyleYY"
+            app:layout_constraintTop_toBottomOf="@+id/cardInterest"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/maturityTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/maturity"
+                    style="@style/normalText"/>
+
+                <Button
+                    android:id="@+id/maturityDateButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/enter_maturity_date"
+                    android:backgroundTint="#1A175B"/>
+<!--                    android:drawableEnd="@drawable/ic_calendar"-->
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <LinearLayout
+            android:id="@+id/buttonLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardMaturityDate">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/borrowButton"
+                style="@style/RedButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/borrow" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/lendButton"
+                style="@style/GreenButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lend" />
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
