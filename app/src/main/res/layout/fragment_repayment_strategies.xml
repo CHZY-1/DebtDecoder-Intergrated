@@ -1,0 +1,272 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/black">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/titleRepaymentStrategies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/strategy_advice"
+            style="@style/TitleStyle"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+
+
+
+        <!-- Avalanche Method Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardAvalancheMethod"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardElevation="4dp"
+            style="@style/CardStyleYY"
+            app:layout_constraintTop_toBottomOf="@id/titleRepaymentStrategies"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <!-- Text details LinearLayout -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="0.6"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Avalanche"
+                        style="@style/normalText"
+                        android:textSize="18sp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Pay off debts from highest to lowest interest rate."
+                        style="@style/subText" />
+
+                    <TextView
+                        android:id="@+id/textHighestInterestAvalanche"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Highest Interest: "
+                        style="@style/subText"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <!-- ImageView for the logo or related image -->
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.4"
+                    android:src="@drawable/avalanche_logo" />
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Snowball Method Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardSnowballMethod"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardElevation="4dp"
+            style="@style/CardStyleYY"
+            app:layout_constraintTop_toBottomOf="@id/cardAvalancheMethod"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <!-- Text details LinearLayout -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="0.6"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Snowball"
+                        style="@style/normalText"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Pay off debts from smallest to largest balance"
+                        style="@style/subText" />
+
+                    <TextView
+                        android:id="@+id/textHighestBalanceSnowball"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Smallest Balance: "
+                        style="@style/subText"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <!-- ImageView for the logo or related image -->
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.4"
+                    android:src="@drawable/snowball_img" />  <!-- Make sure this drawable resource exists -->
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/fullListOfDebts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/all_your_debts"
+            style="@style/TitleStyle"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/cardSnowballMethod"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardCustomMethod"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardElevation="4dp"
+            style="@style/CardStyleYY"
+            app:layout_constraintTop_toBottomOf="@id/fullListOfDebts"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <!-- Text details LinearLayout -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="0.6"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="All Borrowed Loans "
+                        style="@style/normalText"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="List of all your current ongoing loans to be paid."
+                        style="@style/subText" />
+
+                    <TextView
+                        android:id="@+id/textNearestDueCustom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nearest Due: "
+                        style="@style/subText"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <!-- ImageView for the logo or related image -->
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.4"
+                    android:src="@drawable/debt_img" />  <!-- Make sure this drawable resource exists -->
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- O2U Method Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardOwedToYou"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardElevation="4dp"
+            style="@style/CardStyleYY"
+            app:layout_constraintTop_toBottomOf="@id/cardCustomMethod"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <!-- Text details LinearLayout -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="0.6"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Owed To You"
+                        style="@style/normalText"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="List of all your current ongoing loans to be received."
+                        style="@style/subText" />
+
+                    <TextView
+                        android:id="@+id/textNearestDueOwed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nearest Due: "
+                        style="@style/subText"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <!-- ImageView for the logo or related image -->
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.4"
+                    android:src="@drawable/borrow_img" />
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

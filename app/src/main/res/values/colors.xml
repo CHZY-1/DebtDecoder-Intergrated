@@ -10,4 +10,10 @@
     <color name="dark_blue">#1976D2</color>
     <color name="dark_green">#388E3C</color>
     <color name="dark_red">#D32F2F</color>
+    //YY Colors
+    <color name="red">#FF5733</color>
+    <color name="green">#006C52</color>
+    <color name="cardBlue">#141326</color>
+    <color name="hintColor">#FAF5EF</color>
+    <color name="inputLineGold">#E3B53C</color>
 </resources>
