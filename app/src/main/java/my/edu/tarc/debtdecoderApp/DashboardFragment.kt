@@ -53,7 +53,10 @@ class DashboardFragment : Fragment() {
         Log.e("Pie Chart Null pointer", "line chart set bg color ")
         setupLineChart()
         setupPieChart()
-        fetchDataAndPlot()
+
+        if(isAdded){
+            fetchDataAndPlot()
+        }
     }
 
     private fun setupLineChart() {
@@ -83,19 +86,35 @@ class DashboardFragment : Fragment() {
 
         databaseRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val savingsMap = hashMapOf<String, Float>()
-                basicIncomeMap.clear()
-                adHocIncomeMap.clear()
-                availableMonths.clear() // Clear available months before populating
 
-                Log.e("Pie Chart Null pointer", "savings Map $savingsMap ")
+                if(isAdded && _binding != null) {
 
-                processIncomeData(snapshot.child("basicIncome"), savingsMap, "yyyy-MM", 1, basicIncomeMap)
-                processIncomeData(snapshot.child("adHocIncome"), savingsMap, "MMM dd, yyyy", 1, adHocIncomeMap)
-                processExpenseData(snapshot.child("expenses"), savingsMap, "yyyy-MM-dd", -1)
+                    val savingsMap = hashMapOf<String, Float>()
+                    basicIncomeMap.clear()
+                    adHocIncomeMap.clear()
+                    availableMonths.clear() // Clear available months before populating
 
-                updateGraph(savingsMap)
-                setupMonthSpinner()
+                    Log.e("Pie Chart Null pointer", "savings Map $savingsMap ")
+
+                    processIncomeData(
+                        snapshot.child("basicIncome"),
+                        savingsMap,
+                        "yyyy-MM",
+                        1,
+                        basicIncomeMap
+                    )
+                    processIncomeData(
+                        snapshot.child("adHocIncome"),
+                        savingsMap,
+                        "MMM dd, yyyy",
+                        1,
+                        adHocIncomeMap
+                    )
+                    processExpenseData(snapshot.child("expenses"), savingsMap, "yyyy-MM-dd", -1)
+
+                    updateGraph(savingsMap)
+                    setupMonthSpinner()
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {

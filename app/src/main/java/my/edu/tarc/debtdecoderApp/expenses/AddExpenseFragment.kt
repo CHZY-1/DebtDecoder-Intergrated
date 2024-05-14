@@ -54,6 +54,7 @@ class AddExpenseFragment : Fragment(), CategorySelectionListener {
         super.onViewCreated(view, savedInstanceState)
 
         if(isAdded) {
+
             (requireActivity() as MainActivity).toggleHeaderSyncBtnVisibility(true)
 
             binding.cardExpenseCategory.setOnClickListener {
