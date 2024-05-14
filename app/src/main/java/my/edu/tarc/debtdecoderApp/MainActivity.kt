@@ -18,6 +18,7 @@ import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.launch
 import my.edu.tarc.debtdecoder.R
 import my.edu.tarc.debtdecoder.databinding.ActivityMainBinding
+import my.edu.tarc.debtdecoder.databinding.FragmentAdviceQuizBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var firebaseStorage: FirebaseStorage
     lateinit var firebaseDatabase: FirebaseDatabase
     lateinit var synchronizationManager: FirebaseSynchronizationManager
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,6 +82,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_budget -> 2
                 R.id.navigation_expense -> 3
                 R.id.navigation_more -> 4
+                R.id.navigation_advice -> 5
                 else -> -1
             }
 

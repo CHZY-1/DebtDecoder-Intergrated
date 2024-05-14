@@ -18,6 +18,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import my.edu.tarc.debtdecoder.R
+import my.edu.tarc.debtdecoder.databinding.FragmentAdviceQuizBinding
+import my.edu.tarc.debtdecoder.databinding.FragmentMoreBinding
 
 class MoreFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
@@ -68,6 +70,11 @@ class MoreFragment : Fragment() {
         incomeLayout.setOnClickListener {
             navController.navigate(R.id.action_more_to_income)
         }
+        val advicelayout: View = view.findViewById(R.id.layoutAdvices)
+        advicelayout.setOnClickListener {
+            navController.navigate(R.id.navigation_advice)
+        }
+
 
         val notificationLayout: View = view.findViewById(R.id.layoutNotificationSettings)
         notificationLayout.setOnClickListener {

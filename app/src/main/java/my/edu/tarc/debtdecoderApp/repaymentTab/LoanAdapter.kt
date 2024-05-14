@@ -135,6 +135,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import java.util.concurrent.TimeUnit
+import kotlin.math.min
 
 class LoanAdapter(private val repaymentPercentage: Double = 0.35) : RecyclerView.Adapter<LoanAdapter.LoanViewHolder>() {
 
@@ -220,18 +221,30 @@ class LoanAdapter(private val repaymentPercentage: Double = 0.35) : RecyclerView
 
         val sortedLoans = when (strategyType) {
             "Avalanche" -> loans.sortedByDescending { it.interest }
-            "Snowball" -> loans.sortedBy { it.amount }
+            "Snowball" -> loans.sortedBy { it.amount - it.amount_paid } // consider unpaid balance
             else -> loans
         }
 
+        // First, cover all minimum payments
         for (loan in sortedLoans) {
             val minimumPayment = calculateMonthlyInstallment(loan)
-            if (remainingBudget >= minimumPayment) {
-                suggestedInstallments[loan.id] = minimumPayment
-                remainingBudget -= minimumPayment
-            } else {
-                suggestedInstallments[loan.id] = remainingBudget
-                break
+            val payment = min(remainingBudget, minimumPayment)
+            suggestedInstallments[loan.id] = payment
+            remainingBudget -= payment
+        }
+
+        // Then, use any remaining budget to pay down loans starting from highest priority
+        if (remainingBudget > 0) {
+            for (loan in sortedLoans) {
+                val alreadyPaid = suggestedInstallments[loan.id] ?: 0.0
+                val unpaidBalance = loan.amount - loan.amount_paid - alreadyPaid
+                if (unpaidBalance > 0 && remainingBudget > 0) {
+                    val extraPayment = min(remainingBudget, unpaidBalance)
+                    suggestedInstallments[loan.id] = alreadyPaid + extraPayment
+                    remainingBudget -= extraPayment
+                }
+
+                if (remainingBudget <= 0) break
             }
         }
     }

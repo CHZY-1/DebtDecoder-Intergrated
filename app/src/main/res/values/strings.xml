@@ -57,6 +57,7 @@
         <item>BUDGET</item>
         <item>EXPENSES</item>
         <item>MORE</item>
+        <item>FINANCIAL ADVICE</item>
     </string-array>
 
     <string-array name="add_expense_recurrent">
@@ -70,4 +71,13 @@
         <item>Credit/Debit Card</item>
         <item>Online Banking</item>
     </string-array>
+
+     //sh string
+    <string name="video">Videos</string>
+    <string name="article">Articles</string>
+    <string name="podcast">Podcasts</string>
+    <string name="quiz">Quiz</string>
+    <string name="advice">Financial Advices</string>
+    <string name="next_question">Next Question</string>
+    <string name="see_result">See Result</string>
 </resources>

@@ -16,4 +16,10 @@
     <color name="cardBlue">#141326</color>
     <color name="hintColor">#FAF5EF</color>
     <color name="inputLineGold">#E3B53C</color>
+    <color name="greenosh">#008000</color>
+    <color name="redosh">#ff0000</color>
+    <color name="aqua">#249D9F</color>
+    <color name="orange">#CC5500</color>
+    <color name="grey">#808080</color>
+
 </resources>
