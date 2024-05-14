@@ -41,7 +41,7 @@ class DashboardFragment : Fragment() {
     private val dateFormat = SimpleDateFormat("yyyy-MM", Locale.getDefault())
     private var basicIncomeMap = hashMapOf<String, Float>()
     private var adHocIncomeMap = hashMapOf<String, Float>()
-    private val availableMonths = hashSetOf<String>() // Set to track available months
+    private val availableMonths = hashSetOf<String>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
@@ -50,16 +50,16 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.textViewDashboard.text = "TOTAL SAVING PER MONTH"
-        lineChart = binding.lineChart
-        pieChart = binding.pieChart
-        lineChart.setBackgroundColor(getResources().getColor(android.R.color.white))
+        Log.e("Pie Chart Null pointer", "line chart set bg color ")
         setupLineChart()
         setupPieChart()
         fetchDataAndPlot()
     }
 
     private fun setupLineChart() {
+        lineChart = binding.lineChart
+        binding.textViewDashboard.text = "TOTAL SAVING PER MONTH"
+        lineChart.setBackgroundColor(getResources().getColor(android.R.color.white))
         lineChart.xAxis.position = XAxis.XAxisPosition.BOTTOM
         lineChart.xAxis.setDrawGridLines(false)
         lineChart.axisLeft.setDrawGridLines(false)
@@ -69,6 +69,7 @@ class DashboardFragment : Fragment() {
     }
 
     private fun setupPieChart() {
+        pieChart = binding.pieChart
         pieChart.description.isEnabled = false
         pieChart.isDrawHoleEnabled = false
         pieChart.setEntryLabelTextSize(12f)
@@ -186,7 +187,7 @@ class DashboardFragment : Fragment() {
         dataSet.colors = ColorTemplate.MATERIAL_COLORS.toList()
         dataSet.sliceSpace = 3f
         dataSet.selectionShift = 5f
-        dataSet.valueTextSize = 16f // Set the desired text size here
+        dataSet.valueTextSize = 16f
         val data = PieData(dataSet)
         pieChart.data = data
         pieChart.invalidate()
