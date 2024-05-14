@@ -198,4 +198,34 @@
             app:destination="@id/loginFragment" />
     </fragment>
 
+    <!--sheng hao-->
+    <fragment
+        android:id="@+id/navigation_advice"
+        android:name="my.edu.tarc.debtdecoderApp.Advice.Advicefragment"
+        android:label="Advice"
+        tools:layout="@layout/fragment_advicefragment">
+        <action
+            android:id="@+id/action_toQuizDetailFragment"
+            app:destination="@id/showquiz" />
+        <action
+            android:id="@+id/action_toQuizHistoryFragment"
+            app:destination="@id/quizHistoryFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/showquiz"
+        android:name="my.edu.tarc.debtdecoderApp.Advice.QuizDetailFragment"
+        android:label="fragment_quiz_detail"
+        tools:layout="@layout/fragment_quiz_detail" >
+        <argument
+            android:name="quizId"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/quizHistoryFragment"
+        android:name="my.edu.tarc.debtdecoderApp.Advice.QuizHistoryFragment"
+        android:label="Quiz History"
+        tools:layout="@layout/fragment_quiz_history" />
+
 </navigation>
