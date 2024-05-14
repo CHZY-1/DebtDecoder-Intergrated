@@ -399,7 +399,7 @@ class IncomeFragment : Fragment() {
         userBasicIncomeMonthRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (!snapshot.exists()) {
-                    userBasicIncomeMonthRef.push().setValue(mapOf("amount" to amount))
+                    userBasicIncomeMonthRef.push().setValue(mapOf("amount" to amount, "date" to monthYear))
                     selectedMonthForEditing?.let {
                         loadIncomeData(it)
                     }
