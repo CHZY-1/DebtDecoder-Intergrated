@@ -10,6 +10,7 @@
     <color name="dark_blue">#1976D2</color>
     <color name="dark_green">#388E3C</color>
     <color name="dark_red">#D32F2F</color>
+    <color name="colorAccent">#FF4081</color>
     //YY Colors
     <color name="red">#FF5733</color>
     <color name="green">#006C52</color>

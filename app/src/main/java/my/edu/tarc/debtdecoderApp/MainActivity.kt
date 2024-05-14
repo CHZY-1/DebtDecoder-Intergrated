@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
             val showBackButton = destination.id !in
                     arrayOf(R.id.navigation_dashboard,
                         R.id.navigation_debt,
-                        R.id.navigation_budget,
+                        R.id.navigation_income,
                         R.id.navigation_expense,
                         R.id.navigation_more
                     )
@@ -79,10 +79,11 @@ class MainActivity : AppCompatActivity() {
             val titleIndex = when (destination.id) {
                 R.id.navigation_dashboard -> 0
                 R.id.navigation_debt -> 1
-                R.id.navigation_budget -> 2
+                R.id.navigation_income -> 2
                 R.id.navigation_expense -> 3
                 R.id.navigation_more -> 4
                 R.id.navigation_advice -> 5
+                R.id.myAccount -> 6
                 else -> -1
             }
 

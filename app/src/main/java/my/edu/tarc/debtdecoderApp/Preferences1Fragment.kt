@@ -55,7 +55,6 @@ class Preferences1Fragment : Fragment() {
         val optionViews = listOf(
             binding.layoutSavings,
             binding.layoutStudentLoans,
-            binding.layoutBalance
         )
 
         optionViews.forEach { layout ->
@@ -84,7 +83,6 @@ class Preferences1Fragment : Fragment() {
     private fun clearSelections() {
         binding.layoutSavings.isSelected = false
         binding.layoutStudentLoans.isSelected = false
-        binding.layoutBalance.isSelected = false
         resetSelectedStyles()
     }
 
@@ -102,14 +100,13 @@ class Preferences1Fragment : Fragment() {
 
 
     private fun getSelectedPriority(): String = when {
-        binding.layoutSavings.isSelected -> "Saving"
-        binding.layoutStudentLoans.isSelected -> "Paying"
-        binding.layoutBalance.isSelected -> "Balance"
+        binding.layoutSavings.isSelected -> "Avalanche"
+        binding.layoutStudentLoans.isSelected -> "Snowball"
         else -> ""
     }
 
     private fun resetSelectedStyles() {
-        listOf(binding.layoutSavings, binding.layoutStudentLoans, binding.layoutBalance).forEach {
+        listOf(binding.layoutSavings, binding.layoutStudentLoans).forEach {
             setSelected(it, false)
         }
     }

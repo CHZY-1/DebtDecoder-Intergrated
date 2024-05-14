@@ -1,7 +1,8 @@
 <resources>
+    // Expense
     <string name="app_name">DebtDecoder</string>
     <string name="bot_nav_dashboard">Dashboard</string>
-    <string name="bot_nav_budget">Budget</string>
+    <string name="bot_nav_budget">Income</string>
     <string name="bot_nav_expenses">Expenses</string>
     <string name="bot_nav_debt">Debt</string>
     <string name="bot_nav_more">More</string>
@@ -15,7 +16,9 @@
     <string name="expense_timeline_title">Past Week Spendings</string>
     <string name="category_icon">Category Icon For expense</string>
     <string name="line_chart_monthly_expenses_title">Monthly Expense Comparison: Current vs Previous Month</string>
-    //YY Strings
+    <string name="preference2_btn">Finish</string>
+
+    //Debt
     <string name="loan_details_title">Loan Details</string>
     <string name="category">CATEGORY</string>
     <string name="creditor">CREDITOR</string>
@@ -44,12 +47,12 @@
         <item>House Loan</item>
         <item>Others</item>
     </string-array>
+
     <string-array name="loan_options">
         <item>Loan from Robert</item>
         <item>Car Loan</item>
         <item>Home Mortgage</item>
     </string-array>
-    // YY Strings End
 
     <string-array name="module_titles">
         <item>DASHBOARD</item>
@@ -58,6 +61,7 @@
         <item>EXPENSES</item>
         <item>MORE</item>
         <item>FINANCIAL ADVICE</item>
+        <item>MY ACCOUNT</item>
     </string-array>
 
     <string-array name="add_expense_recurrent">
@@ -72,7 +76,7 @@
         <item>Online Banking</item>
     </string-array>
 
-     //sh string
+     //Advice
     <string name="video">Videos</string>
     <string name="article">Articles</string>
     <string name="podcast">Podcasts</string>

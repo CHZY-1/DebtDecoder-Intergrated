@@ -119,7 +119,7 @@
         android:id="@+id/buttonNext"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Next"
+        android:text="@string/preference2_btn"
         app:layout_constraintTop_toBottomOf="@id/linearLayoutBudgeting"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

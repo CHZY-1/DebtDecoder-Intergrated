@@ -14,7 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import my.edu.tarc.debtdecoder.databinding.FragmentStrategyDetailsBinding
-import my.edu.tarc.debtdecoderApp.More.IncomeViewModel
+import my.edu.tarc.debtdecoderApp.income.IncomeViewModel
 import my.edu.yyass.Loan
 import my.edu.tarc.debtdecoderApp.repaymentTab.LoanAdapter
 

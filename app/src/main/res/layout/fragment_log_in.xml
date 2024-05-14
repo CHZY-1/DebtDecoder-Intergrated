@@ -35,14 +35,16 @@
 
     <EditText
         android:id="@+id/edtLPass"
-        android:layout_width="294dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         android:textColor="@android:color/white"
         android:textColorHint="#ACA8A8"
+        app:layout_constraintEnd_toStartOf="@+id/btnViewPass"
         app:layout_constraintStart_toEndOf="@+id/imgPass"
         app:layout_constraintTop_toBottomOf="@+id/edtSIEmail" />
 
@@ -56,6 +58,19 @@
         app:layout_constraintTop_toTopOf="@+id/edtLPass"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@android:drawable/ic_lock_idle_lock" />
+
+    <ImageView
+        android:id="@+id/btnViewPass"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="View Password"
+        app:layout_constraintBottom_toBottomOf="@+id/edtLPass"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edtLPass"
+        app:layout_constraintVertical_bias="0.5"
+        app:srcCompat="@android:drawable/ic_menu_view" />
+
 
     <ImageView
         android:id="@+id/imgEmail"

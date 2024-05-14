@@ -13,11 +13,24 @@
         android:label="Dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
+<!--    Income-->
     <fragment
-        android:id="@+id/navigation_budget"
-        android:name="my.edu.tarc.debtdecoderApp.BudgetFragment"
-        android:label="Budget"
-        tools:layout="@layout/fragment_budget" />
+        android:id="@+id/navigation_income"
+        android:name="my.edu.tarc.debtdecoderApp.IncomeFragment"
+        android:label="Incomet"
+        tools:layout="@layout/fragment_income">
+        <action
+            android:id="@+id/action_income_to_addIncome"
+            app:destination="@id/addIncome" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addIncome"
+        android:name="my.edu.tarc.debtdecoderApp.income.AddIncomeFragment"
+        android:label="AddIncome"
+        tools:layout="@layout/fragment_add_income">
+    </fragment>
+
 
 <!--    Expense Module-->
     <fragment
@@ -71,8 +84,6 @@
         android:name="my.edu.tarc.debtdecoderApp.expenses.InsightMonthlyExpensesFragment"
         android:label="InsightMonthlyExpensesFragment" />
 
-
-
 <!--    Debt Module-->
     <fragment
         android:id="@+id/navigation_debt"
@@ -88,34 +99,9 @@
         <action
             android:id="@+id/action_more_to_myAcc"
             app:destination="@id/myAccount" />
-        <action
-            android:id="@+id/action_more_to_income"
-            app:destination="@id/income" />
     </fragment>
 
-    <fragment
-        android:id="@+id/income"
-        android:name="my.edu.tarc.debtdecoderApp.More.IncomeFragment"
-        android:label="Income"
-        tools:layout="@layout/fragment_income">
-        <action
-            android:id="@+id/action_income_to_addIncome"
-            app:destination="@id/addIncome" />
-        <action
-            android:id="@+id/action_income_to_more"
-            app:destination="@+id/navigation_more"/>
-    </fragment>
-
-    <fragment
-        android:id="@+id/addIncome"
-        android:name="my.edu.tarc.debtdecoderApp.More.AddIncomeFragment"
-        android:label="AddIncome"
-        tools:layout="@layout/fragment_add_income">
-        <action
-            android:id="@+id/action_addIncome_to_Income"
-            app:destination="@id/income" />
-    </fragment>
-
+<!--    My account-->
     <fragment
         android:id="@+id/myAccount"
         android:name="my.edu.tarc.debtdecoderApp.More.MyAccountFragment"
@@ -185,20 +171,10 @@
         android:label="Preferences 2">
         <action
             android:id="@+id/action_preferences2_to_preferences3"
-            app:destination="@id/preferences3Fragment" />
-    </fragment>
-
-    <!-- Preferences 3 Fragment -->
-    <fragment
-        android:id="@+id/preferences3Fragment"
-        android:name="my.edu.tarc.debtdecoderApp.Preferences3Fragment"
-        android:label="Preferences 3">
-        <action
-            android:id="@+id/action_preferences3_to_login"
             app:destination="@id/loginFragment" />
     </fragment>
 
-    <!--sheng hao-->
+    <!--Advice-->
     <fragment
         android:id="@+id/navigation_advice"
         android:name="my.edu.tarc.debtdecoderApp.Advice.Advicefragment"

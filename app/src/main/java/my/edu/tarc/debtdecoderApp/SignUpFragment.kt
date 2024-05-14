@@ -1,8 +1,11 @@
 package my.edu.tarc.debtdecoderApp
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,26 +64,54 @@ class SignUpFragment : Fragment() {
         binding.btnSU.setOnClickListener {
             val email = binding.edtEmail.text.toString().trim()
             val password = binding.edtPass.text.toString().trim()
+            val confirmPassword = binding.edtConPass.text.toString().trim()
             val fullName = binding.edtName.text.toString().trim()
-            val age = binding.edtAge.text.toString().trim()
-            val income = binding.edtIncome.text.toString().trim()
+            val ageStr = binding.edtAge.text.toString().trim()
+            val incomeStr = binding.edtIncome.text.toString().trim()
 
-            if (email.isNotEmpty() && password.isNotEmpty()) {
-                auth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            val user = task.result?.user
-                            user?.let {
-                                saveUserInfo(it, fullName, age, income)
-                                // Navigate to Preferences1Fragment after sign-up
-                            }
-                        } else {
-                            Toast.makeText(context, "Registration failed", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-            } else {
+            if (email.isEmpty() || password.isEmpty() || fullName.isEmpty() || ageStr.isEmpty() || incomeStr.isEmpty()) {
                 Toast.makeText(context, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
+
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                Toast.makeText(context, "Please enter a valid email address", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val age = ageStr.toIntOrNull()
+            if (age == null || age <= 0) {
+                Toast.makeText(context, "Please enter a valid age", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val income = incomeStr.toDoubleOrNull()
+            if (income == null || income <= 0) {
+                Toast.makeText(context, "Please enter a valid income", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (password != confirmPassword) {
+                Toast.makeText(context, "Passwords do not match", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (!binding.checkBox.isChecked) {
+                Toast.makeText(context, "You must agree to the terms of use", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val user = task.result?.user
+                        user?.let {
+                            saveUserInfo(it, fullName, age, income)
+                        }
+                    } else {
+                        Toast.makeText(context, "Registration failed", Toast.LENGTH_SHORT).show()
+                    }
+                }
         }
 
         binding.txtLayoutPassword.setEndIconOnClickListener {
@@ -96,15 +127,22 @@ class SignUpFragment : Fragment() {
         binding.imgSI.setOnClickListener {
             findNavController().navigate(R.id.action_signup_to_login)
         }
+
+        binding.txtTerm.setOnClickListener {
+            val url = "https://policies.google.com/terms?hl=en-US"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
+        }
     }
 
-    private fun saveUserInfo(user: FirebaseUser, fullName: String, age: String, income: String) {
+    private fun saveUserInfo(user: FirebaseUser, fullName: String, age: Int, income: Double) {
         // Create a map to hold the user's basic info
         val userInfo = mapOf(
             "email" to user.email,
             "fullName" to fullName,
-            "age" to age,
-            "income" to income
+            "age" to age.toString(),
+            "income" to income.toString()
         )
 
         // Save the user's basic information to the Firebase Realtime Database
@@ -112,7 +150,7 @@ class SignUpFragment : Fragment() {
             .addOnSuccessListener {
                 Toast.makeText(context, "Registration Successful", Toast.LENGTH_SHORT).show()
                 // Save the past four months of income
-                savePastIncome(user.uid, income.toDouble())
+                savePastIncome(user.uid, income)
                 findNavController().navigate(R.id.action_signup_to_preferences1)
             }
             .addOnFailureListener {

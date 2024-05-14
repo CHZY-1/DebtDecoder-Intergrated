@@ -1,6 +1,8 @@
 package my.edu.tarc.debtdecoder
 
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,15 +13,14 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import my.edu.tarc.debtdecoder.databinding.FragmentLogInBinding
-import my.edu.tarc.debtdecoder.R
 
 class LoginFragment : Fragment() {
-    // View Binding variable
     private var _binding: FragmentLogInBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
+    private var isPasswordVisible: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +35,6 @@ class LoginFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        // Find the toolbar by its ID and set its visibility to GONE
         val toolbar = activity?.findViewById<View>(R.id.toolbar)
         val footer = activity?.findViewById<View>(R.id.bottom_navigation)
         toolbar?.visibility = View.GONE
@@ -43,7 +43,6 @@ class LoginFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
-        // Restore the toolbar visibility by setting it to VISIBLE
         val toolbar = activity?.findViewById<View>(R.id.toolbar)
         val footer = activity?.findViewById<View>(R.id.bottom_navigation)
         toolbar?.visibility = View.VISIBLE
@@ -60,30 +59,40 @@ class LoginFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            // Disable the login button to prevent multiple clicks
             binding.btnLog.isEnabled = false
-
-            // Call login function
             loginUser(email, password)
         }
 
-        // Navigate to the Sign-Up page
         binding.txtSU.setOnClickListener {
             findNavController().navigate(R.id.action_login_to_signup)
         }
 
-        binding.txtForg.setOnClickListener{
+        binding.txtForg.setOnClickListener {
             findNavController().navigate(R.id.action_login_to_forgot_password)
+        }
+
+        binding.btnViewPass.setOnClickListener {
+            togglePasswordVisibility()
         }
     }
 
+    private fun togglePasswordVisibility() {
+        if (isPasswordVisible) {
+            binding.edtLPass.transformationMethod = PasswordTransformationMethod.getInstance()
+            binding.btnViewPass.setImageResource(android.R.drawable.ic_menu_view)
+        } else {
+            binding.edtLPass.transformationMethod = HideReturnsTransformationMethod.getInstance()
+            binding.btnViewPass.setImageResource(android.R.drawable.ic_menu_close_clear_cancel)
+        }
+        isPasswordVisible = !isPasswordVisible
+        binding.edtLPass.setSelection(binding.edtLPass.text.length)
+    }
+
     private fun loginUser(email: String, password: String) {
-        // Disable the login button to prevent repeated clicks
         binding.btnLog.isEnabled = false
 
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
-                // Re-enable the login button regardless of success or failure
                 binding.btnLog.isEnabled = true
 
                 if (task.isSuccessful) {
@@ -91,34 +100,26 @@ class LoginFragment : Fragment() {
                     val userID = user?.uid
 
                     if (userID != null) {
-                        // Retrieve data from Firebase Realtime Database
                         database.child("users").child(userID).addListenerForSingleValueEvent(object : ValueEventListener {
                             override fun onDataChange(snapshot: DataSnapshot) {
                                 if (snapshot.exists()) {
-                                    // Extract user data (e.g., full name, age, income)
                                     val fullName = snapshot.child("fullName").getValue(String::class.java) ?: "Unknown"
                                     val age = snapshot.child("age").getValue(String::class.java) ?: "Unknown"
                                     val income = snapshot.child("income").getValue(String::class.java) ?: "0"
 
-                                    // Example: Print the data to the log (optional)
                                     Log.d("LoginFragment", "Full Name: $fullName, Age: $age, Income: $income")
 
-                                    // Retrieve preferences if needed (adjust your path structure accordingly)
                                     val preferences1 = snapshot.child("priority").children.map {
                                         it.key to it.value
                                     }.toMap()
                                     val preferences2 = snapshot.child("familiarity").children.map {
                                         it.key to it.value
                                     }.toMap()
-                                    val preferences3 = snapshot.child("notification").children.map {
-                                        it.key to it.value
-                                    }.toMap()
 
-                                    // Navigate to the dashboard
                                     Toast.makeText(requireContext(), "Login successful!", Toast.LENGTH_SHORT).show()
                                     findNavController().navigate(R.id.action_login_to_navigationdash)
                                 } else {
-                                    Toast.makeText(requireContext(), "my.edu.tarc.debtdecoderApp.User data not found", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(requireContext(), "User data not found", Toast.LENGTH_SHORT).show()
                                 }
                             }
 
@@ -131,13 +132,11 @@ class LoginFragment : Fragment() {
                         Toast.makeText(requireContext(), "Failed to obtain user ID", Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    // Extract and show a specific error message
                     val errorMessage = task.exception?.localizedMessage ?: "Login failed"
                     Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
                 }
             }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

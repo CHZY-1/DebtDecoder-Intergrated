@@ -5,14 +5,13 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -34,6 +33,8 @@ class MyAccountFragment : Fragment() {
     private var newPasswordEditText: EditText? = null
     private var confirmPasswordEditText: EditText? = null
     private var submitButton: Button? = null
+    private var isUploading: Boolean = false
+    private lateinit var backCallback: OnBackPressedCallback
 
     // Callback to receive the selected image from the intent
     private val getImage = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -42,7 +43,7 @@ class MyAccountFragment : Fragment() {
             selectedImageUri?.let { uri ->
                 // Set the new profile image temporarily
                 profileImageView?.setImageURI(uri)
-                // Upload the image to Firebase Storage
+                // Start upload and restrict user actions
                 uploadProfilePicture(uri)
             }
         }
@@ -50,6 +51,18 @@ class MyAccountFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+        backCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (isUploading) {
+                    Toast.makeText(requireContext(), "Please wait for the profile picture to upload", Toast.LENGTH_SHORT).show()
+                } else {
+                    isEnabled = false
+                    activity?.onBackPressed()
+                }
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, backCallback)
     }
 
     override fun onCreateView(
@@ -73,25 +86,16 @@ class MyAccountFragment : Fragment() {
 
         // Set listeners
         submitButton?.setOnClickListener {
-            updateNicknameAndAge()
+            if (isUploading) {
+                Toast.makeText(requireContext(), "Please wait for the profile picture to upload", Toast.LENGTH_SHORT).show()
+            } else {
+                updateNicknameAndAge()
+            }
         }
-
-//        val navController = findNavController()
-//        val backButton = activity?.findViewById<ImageView>(R.id.back_button)
-//        backButton?.setOnClickListener {
-//            // Ensure that navController is initialized properly (Assuming navController is already declared and available)
-//            navController.navigate(R.id.action_myAcc_to_more)
-//        }
-
     }
 
     override fun onResume() {
         super.onResume()
-
-        // Find the TextView by its ID and set the title to "My Account"
-//        activity?.findViewById<TextView>(R.id.header_title)?.let {
-//            it.text = "My Account"
-//        }
 
         // Hide the navigation bar and toolbar
         activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.GONE
@@ -104,6 +108,20 @@ class MyAccountFragment : Fragment() {
         activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.VISIBLE
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        menu.clear() // Clear the menu to disable navigation options while uploading
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (isUploading) {
+            // Prevent navigation if uploading
+            Toast.makeText(requireContext(), "Please wait for the profile picture to upload", Toast.LENGTH_SHORT).show()
+            true
+        } else {
+            super.onOptionsItemSelected(item)
+        }
+    }
 
     private fun initializeUI(view: View) {
         profileImageView = view.findViewById(R.id.profilePic)
@@ -121,7 +139,11 @@ class MyAccountFragment : Fragment() {
         }
 
         view.findViewById<TextView>(R.id.tvDeleteAccount).setOnClickListener {
-            deleteAccount()
+            if (isUploading) {
+                Toast.makeText(requireContext(), "Please wait for the profile picture to upload", Toast.LENGTH_SHORT).show()
+            } else {
+                deleteAccount()
+            }
         }
     }
 
@@ -156,8 +178,8 @@ class MyAccountFragment : Fragment() {
                     }
                 }
             } else {
-                Log.e("MyAccountFragment", "my.edu.tarc.debtdecoderApp.User data not found in Realtime Database")
-                Toast.makeText(requireContext(), "my.edu.tarc.debtdecoderApp.User data not found", Toast.LENGTH_SHORT).show()
+                Log.e("MyAccountFragment", "User data not found in Realtime Database")
+                Toast.makeText(requireContext(), "User data not found", Toast.LENGTH_SHORT).show()
                 profileImageView?.setImageResource(R.drawable.ic_account) // Set to default image
             }
         }.addOnFailureListener { e ->
@@ -175,6 +197,10 @@ class MyAccountFragment : Fragment() {
         val storageRef = storage.reference
         val profileRef = storageRef.child("profile_pictures/$userId.jpg")
 
+        // Set the uploading flag to true and disable UI interactions
+        isUploading = true
+        setUIEnabled(false)
+
         // Upload the new profile picture to Firebase Storage
         profileRef.putFile(imageUri)
             .addOnSuccessListener {
@@ -185,11 +211,17 @@ class MyAccountFragment : Fragment() {
                 }.addOnFailureListener { exception ->
                     Log.e("MyAccountFragment", "Error retrieving download URL: ${exception.message}", exception)
                     Toast.makeText(requireContext(), "Failed to retrieve profile picture URL", Toast.LENGTH_SHORT).show()
+                    // Set the uploading flag to false and enable UI interactions
+                    isUploading = false
+                    setUIEnabled(true)
                 }
             }
             .addOnFailureListener { exception ->
                 Log.e("MyAccountFragment", "Profile picture upload failed: ${exception.message}", exception)
                 Toast.makeText(requireContext(), "Upload failed: ${exception.message}", Toast.LENGTH_SHORT).show()
+                // Set the uploading flag to false and enable UI interactions
+                isUploading = false
+                setUIEnabled(true)
             }
     }
 
@@ -198,11 +230,28 @@ class MyAccountFragment : Fragment() {
         databaseRef.updateChildren(mapOf("profilePictureUri" to downloadUrl))
             .addOnSuccessListener {
                 Toast.makeText(requireContext(), "Profile picture updated!", Toast.LENGTH_SHORT).show()
+                // Set the uploading flag to false and enable UI interactions
+                isUploading = false
+                setUIEnabled(true)
             }
             .addOnFailureListener { exception ->
                 Log.e("MyAccountFragment", "Updating profile picture URI in Realtime Database failed: ${exception.message}", exception)
                 Toast.makeText(requireContext(), "Update failed: ${exception.message}", Toast.LENGTH_SHORT).show()
+                // Set the uploading flag to false and enable UI interactions
+                isUploading = false
+                setUIEnabled(true)
             }
+    }
+
+    private fun setUIEnabled(enabled: Boolean) {
+        nicknameEditText?.isEnabled = enabled
+        ageEditText?.isEnabled = enabled
+        oldPasswordEditText?.isEnabled = enabled
+        newPasswordEditText?.isEnabled = enabled
+        confirmPasswordEditText?.isEnabled = enabled
+        submitButton?.isEnabled = enabled
+        profileImageView?.isEnabled = enabled
+        view?.findViewById<TextView>(R.id.tvDeleteAccount)?.isEnabled = enabled
     }
 
     private fun updateNicknameAndAge() {
@@ -277,5 +326,4 @@ class MyAccountFragment : Fragment() {
                 Toast.makeText(requireContext(), "Failed to delete account: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
-
 }

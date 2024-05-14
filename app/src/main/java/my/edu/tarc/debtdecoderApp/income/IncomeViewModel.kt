@@ -1,4 +1,4 @@
-package my.edu.tarc.debtdecoderApp.More
+package my.edu.tarc.debtdecoderApp.income
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

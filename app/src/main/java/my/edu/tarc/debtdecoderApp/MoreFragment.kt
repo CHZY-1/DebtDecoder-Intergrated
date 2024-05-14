@@ -1,7 +1,10 @@
 package my.edu.tarc.debtdecoderApp
 
 import android.app.AlertDialog
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -18,8 +21,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import my.edu.tarc.debtdecoder.R
-import my.edu.tarc.debtdecoder.databinding.FragmentAdviceQuizBinding
-import my.edu.tarc.debtdecoder.databinding.FragmentMoreBinding
 
 class MoreFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
@@ -35,6 +36,7 @@ class MoreFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_more, container, false)
     }
 
+    //Test
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -66,78 +68,30 @@ class MoreFragment : Fragment() {
             navController.navigate(R.id.action_more_to_myAcc)
         }
 
-        val incomeLayout: View = view.findViewById(R.id.layoutIncome)
-        incomeLayout.setOnClickListener {
-            navController.navigate(R.id.action_more_to_income)
-        }
-        val advicelayout: View = view.findViewById(R.id.layoutAdvices)
-        advicelayout.setOnClickListener {
-            navController.navigate(R.id.navigation_advice)
-        }
-
-
         val notificationLayout: View = view.findViewById(R.id.layoutNotificationSettings)
         notificationLayout.setOnClickListener {
-            val userId = FirebaseAuth.getInstance().currentUser?.uid
-            val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_notification_settings, null)
-            val inAppCheckBox = dialogView.findViewById<CheckBox>(R.id.cbInApp)
-            val noneCheckBox = dialogView.findViewById<CheckBox>(R.id.cbNone)
+            val intent = Intent()
+            intent.action = Settings.ACTION_APP_NOTIFICATION_SETTINGS
 
-            // Fetch user preferences from Firebase and update checkboxes
-            if (userId != null) {
-                val userPrefRef = FirebaseDatabase.getInstance().getReference("users/$userId/preferences")
-                userPrefRef.child("customNotify").get().addOnSuccessListener { dataSnapshot ->
-                    when (dataSnapshot.value) {
-                        "App" -> {
-                            inAppCheckBox.isChecked = true
-                        }
-                        "No" -> {
-                            noneCheckBox.isChecked = true
-                        }
-                    }
-                }.addOnFailureListener {
-                    Toast.makeText(context, "Failed to fetch settings", Toast.LENGTH_SHORT).show()
-                }
+            // Pass the package name to the settings activity
+            intent.putExtra(Settings.EXTRA_APP_PACKAGE, context?.packageName)
+
+            // If you want to support older versions of Android, use the following extras
+            intent.putExtra("app_package", context?.packageName)
+            context?.applicationInfo?.let { it1 -> intent.putExtra("app_uid", it1.uid) }
+
+            try {
+                context?.startActivity(intent)
+            } catch (e: ActivityNotFoundException) {
+                Toast.makeText(context, "Unable to open notification settings", Toast.LENGTH_SHORT).show()
             }
-
-            // Logic for 'None' checkbox
-            noneCheckBox.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) {
-                    inAppCheckBox.isChecked = false
-                }
-            }
-
-            // Logic to prevent 'None' from being selected with other options
-            val checkListener = CompoundButton.OnCheckedChangeListener { _, _ ->
-                if (inAppCheckBox.isChecked) {
-                    noneCheckBox.isChecked = false
-                }
-            }
-
-            inAppCheckBox.setOnCheckedChangeListener(checkListener)
-
-            // Display the dialog
-            AlertDialog.Builder(context).setView(dialogView)
-                .setPositiveButton("Save") { dialog, _ ->
-                    // Construct the notification preference based on checkbox states
-                    val notifyPreference = when {
-                        inAppCheckBox.isChecked -> "App"
-                        else -> "No"
-                    }
-
-                    // Update the preference in Firebase
-                    if (userId != null) {
-                        savePriorityToFirebase(userId, notifyPreference)
-                    }
-                    dialog.dismiss()
-                }
-                .setNegativeButton("Cancel") { dialog, _ ->
-                    dialog.cancel()
-                }
-                .create()
-                .show()
         }
 
+        // Navigate to Advice module
+        val adviceLayout: View = view.findViewById(R.id.layoutAdvices)
+        adviceLayout.setOnClickListener {
+            navController.navigate(R.id.navigation_advice)
+        }
     }
 
     private fun savePriorityToFirebase(userId: String, notify: String) {

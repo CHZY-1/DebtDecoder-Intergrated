@@ -1,5 +1,6 @@
 package my.edu.tarc.debtdecoderApp.expenses
 
+import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,6 +58,20 @@ class ExpenseAdapter(private var expenses: List<Expense>, private val imageLoade
     override fun onBindViewHolder(holder: ExpenseViewHolder, position: Int) {
         holder.bind(expenses[position])
         holder.setCheckBoxVisibility(isSelectionMode)
+
+        holder.itemView.setOnClickListener {
+            val remark = expenses[position].remark
+            val message = if (remark.isNotBlank() || remark != "") remark else "No Remark"
+
+            val builder = AlertDialog.Builder(holder.itemView.context)
+            builder.setTitle("Expense Remark")
+            builder.setMessage(message)
+            builder.setPositiveButton("OK") { dialog, _ ->
+                dialog.dismiss()
+            }
+            val dialog = builder.create()
+            dialog.show()
+        }
 
     }
 

@@ -5,7 +5,7 @@
         android:icon="@drawable/ic_dashboard_selector"
         android:title="@string/bot_nav_dashboard" />
     <item
-        android:id="@+id/navigation_budget"
+        android:id="@+id/navigation_income"
         android:icon="@drawable/ic_budget_selector"
         android:title="@string/bot_nav_budget" />
     <item

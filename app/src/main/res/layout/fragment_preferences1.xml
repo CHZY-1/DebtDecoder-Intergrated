@@ -10,7 +10,7 @@
         android:id="@+id/textViewHeader"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="What best describes your current financial priority?"
+        android:text="Which debt repayment strategy are you considering?"
         android:textSize="24sp"
         android:textColor="#FFFFFF"
         android:textAlignment="center"
@@ -51,7 +51,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Building a solid emergency fund and savings"
+                android:text="Prioritizing High-Interest Debts"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
                 android:layout_gravity="center_vertical"
@@ -79,40 +79,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Paying off loans as quickly as possible"
+                android:text="Paying off Smaller Debts First"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
                 android:layout_gravity="center_vertical"
                 android:paddingStart="16dp"/>
         </LinearLayout>
 
-        <!-- Custom layout for Balance between Debt and Saving -->
-        <LinearLayout
-            android:id="@+id/layoutBalance"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:clickable="true"
-            android:focusable="true"
-            android:background="?android:attr/selectableItemBackground"
-            android:padding="8dp"
-            android:elevation="4dp">
-
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/balance"
-                android:contentDescription="Debt and Saving Balance"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Striking a balance between paying debt and saving"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:layout_gravity="center_vertical"
-                android:paddingStart="16dp"/>
-        </LinearLayout>
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton

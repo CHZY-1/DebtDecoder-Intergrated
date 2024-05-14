@@ -1,4 +1,4 @@
-package my.edu.tarc.debtdecoderApp.More
+package my.edu.tarc.debtdecoderApp.income
 
 import android.app.DatePickerDialog
 import android.os.Bundle

@@ -23,9 +23,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
-
-
-
         <!-- Avalanche Method Card -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardAvalancheMethod"
@@ -38,7 +35,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
             <LinearLayout
+                android:id="@+id/avalancheLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -81,10 +83,21 @@
                     android:layout_weight="0.4"
                     android:src="@drawable/avalanche_logo" />
             </LinearLayout>
-
+                <TextView
+                    android:id="@+id/recommendedAvalanche"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Recommended"
+                    android:textColor="@color/colorAccent"
+                    android:background="@drawable/recommended_background"
+                    android:padding="4dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone" />
+            </RelativeLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Snowball Method Card -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardSnowballMethod"
             android:layout_width="0dp"
@@ -96,7 +109,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <LinearLayout
+                android:id="@+id/snowballLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -139,7 +156,19 @@
                     android:layout_weight="0.4"
                     android:src="@drawable/snowball_img" />  <!-- Make sure this drawable resource exists -->
             </LinearLayout>
-
+                <TextView
+                    android:id="@+id/recommendedSnowball"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Recommended"
+                    android:textColor="@color/colorAccent"
+                    android:background="@drawable/recommended_background"
+                    android:padding="4dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone" />
+            </RelativeLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <!-- Title -->

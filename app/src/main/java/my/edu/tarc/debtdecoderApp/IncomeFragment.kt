@@ -1,26 +1,19 @@
-package my.edu.tarc.debtdecoderApp.More
+package my.edu.tarc.debtdecoderApp
 
 import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.NumberPicker
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import my.edu.tarc.debtdecoder.R
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.XAxis
@@ -31,9 +24,14 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
+import my.edu.tarc.debtdecoder.R
+import my.edu.tarc.debtdecoderApp.income.AdHocIncomeAdapter
+import my.edu.tarc.debtdecoderApp.income.AdHocIncomeItem
+import my.edu.tarc.debtdecoderApp.income.IncomeViewModel
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
+import java.util.*
 
 class IncomeFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
@@ -45,46 +43,28 @@ class IncomeFragment : Fragment() {
     private lateinit var incomeViewModel: IncomeViewModel
     private lateinit var editButton: Button
     private val adHocIncomeList = mutableListOf<AdHocIncomeItem>()
-    private var allAdHocIncomeList = mutableListOf<AdHocIncomeItem>() // Holds all ad hoc income data for filtering
+    private var allAdHocIncomeList =
+        mutableListOf<AdHocIncomeItem>() // Holds all ad hoc income data for filtering
     private val basicIncomeTotals = mutableMapOf<String, Float>()
     private var selectedMonthForEditing: String? = null
-
-    override fun onResume() {
-        super.onResume()
-
-//        activity?.findViewById<TextView>(R.id.header_title)?.let {
-//            it.text = "Income"
-//        }
-
-        activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.GONE
-    }
-
-    override fun onPause() {
-        super.onPause()
-
-        activity?.findViewById<View>(R.id.bottom_navigation)?.visibility = View.VISIBLE
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_income, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Ensure correct Firebase initialization
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().reference
 
-        // Initialize RecyclerView and adapter
         recyclerView = view.findViewById(R.id.ad_hoc_income_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        adapter = AdHocIncomeAdapter(allAdHocIncomeList) { adHocIncome ->
-            showAdHocIncomeDetailsDialog(adHocIncome)
+        adapter = AdHocIncomeAdapter(mutableListOf()) { adHocIncome ->
+            showAdHocIncomeOptionsDialog(adHocIncome)
         }
         recyclerView.adapter = adapter
 
@@ -94,26 +74,17 @@ class IncomeFragment : Fragment() {
             navController.navigate(R.id.action_income_to_addIncome)
         }
 
-//        val backButton = activity?.findViewById<ImageView>(R.id.back_button)
-//        backButton?.setOnClickListener {
-//            navController.navigate(R.id.action_income_to_more)
-//        }
-
         basicIncomeTextView = view.findViewById(R.id.basic_income)
 
-        // Initialize the chart
         monthlyIncomeChart = view.findViewById(R.id.monthly_income_chart)
 
-        // ViewModel setup using ViewModelProvider for obtaining a ViewModel.
         incomeViewModel = ViewModelProvider(requireActivity()).get(IncomeViewModel::class.java)
 
-        // Load aggregated income data
         allAdHocIncomeList = mutableListOf()
         loadIncomeData()
         editButton = view.findViewById(R.id.edit_button)
         editButton.setOnClickListener {
             selectedMonthForEditing?.let { month ->
-                // Launch an edit dialog or fragment
                 showEditBasicIncomeDialog(month)
             }
         }
@@ -127,34 +98,31 @@ class IncomeFragment : Fragment() {
         viewAllBasicIncomeButton.setOnClickListener {
             showAllBasicIncomeDialog()
         }
-
     }
 
-    private fun loadIncomeData() {
+    private fun loadIncomeData(selectedMonth: String? = null) {
         val currentUser = auth.currentUser ?: return
 
-        // Load basic and ad hoc income data by month
         val userBasicIncomeRef = database.child("users/${currentUser.uid}/basicIncome")
         val userAdHocIncomeRef = database.child("users/${currentUser.uid}/adHocIncome")
 
-        // Initialize structures to hold monthly totals
         val adHocIncomeTotals = mutableMapOf<String, Float>()
         basicIncomeTotals.clear()
         allAdHocIncomeList.clear()
 
-        // Load basic income data by month
         userBasicIncomeRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children.forEach { monthSnapshot ->
                     val month = monthSnapshot.key ?: return@forEach
                     monthSnapshot.children.forEach { incomeSnapshot ->
-                        val amount = incomeSnapshot.child("amount").getValue(Double::class.java)?.toFloat() ?: 0f
-                        basicIncomeTotals[month] = basicIncomeTotals.getOrDefault(month, 0f) + amount
+                        val amount =
+                            incomeSnapshot.child("amount").getValue(Double::class.java)?.toFloat()
+                                ?: 0f
+                        basicIncomeTotals[month] =
+                            basicIncomeTotals.getOrDefault(month, 0f) + amount
                     }
                 }
-
-                // Proceed to load ad hoc income data after basic income data is loaded
-                loadAdHocIncomeData(userAdHocIncomeRef, adHocIncomeTotals)
+                loadAdHocIncomeData(userAdHocIncomeRef, adHocIncomeTotals, selectedMonth)
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -163,25 +131,38 @@ class IncomeFragment : Fragment() {
         })
     }
 
-    private fun loadAdHocIncomeData(userAdHocIncomeRef: DatabaseReference, adHocIncomeTotals: MutableMap<String, Float>) {
+    private fun loadAdHocIncomeData(
+        userAdHocIncomeRef: DatabaseReference,
+        adHocIncomeTotals: MutableMap<String, Float>,
+        selectedMonth: String?
+    ) {
         userAdHocIncomeRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val tempAdHocIncomeList = mutableListOf<AdHocIncomeItem>() // Temporary list to hold fetched items
+                val tempAdHocIncomeList = mutableListOf<AdHocIncomeItem>()
                 snapshot.children.forEach { monthSnapshot ->
                     monthSnapshot.children.forEach { incomeSnapshot ->
-                        val adHocItem = incomeSnapshot.getValue(AdHocIncomeItem::class.java)
-                        adHocItem?.let {
-                            tempAdHocIncomeList.add(it) // Add to temporary list
-                            val amount = it.amount.toFloat()
-                            adHocIncomeTotals[monthSnapshot.key ?: ""] = adHocIncomeTotals.getOrDefault(monthSnapshot.key ?: "", 0f) + amount
+                        try {
+                            val adHocItem = incomeSnapshot.getValue(AdHocIncomeItem::class.java)
+                                ?.copy(key = incomeSnapshot.key ?: "")
+                            adHocItem?.let {
+                                tempAdHocIncomeList.add(it)
+                                val amount = it.amount.toFloat()
+                                adHocIncomeTotals[monthSnapshot.key ?: ""] =
+                                    adHocIncomeTotals.getOrDefault(
+                                        monthSnapshot.key ?: "",
+                                        0f
+                                    ) + amount
+                            }
+                        } catch (e: Exception) {
+                            Log.e(
+                                "IncomeFragment",
+                                "Error parsing ad hoc income item: ${e.message}"
+                            )
                         }
                     }
                 }
-
-                // Update the master list of all ad hoc income items
                 allAdHocIncomeList.addAll(tempAdHocIncomeList)
 
-                // Aggregate the totals
                 val finalIncomeTotals = mutableMapOf<String, Float>()
                 (basicIncomeTotals.keys + adHocIncomeTotals.keys).forEach { month ->
                     val basicTotal = basicIncomeTotals.getOrDefault(month, 0f)
@@ -189,8 +170,12 @@ class IncomeFragment : Fragment() {
                     finalIncomeTotals[month] = basicTotal + adHocTotal
                 }
 
-                // Populate the chart
                 populateMonthlyIncomeChart(finalIncomeTotals)
+                if (selectedMonth != null) {
+                    filterAdHocIncomeForMonth(selectedMonth)
+                } else {
+                    adapter.updateData(mutableListOf())
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -199,6 +184,119 @@ class IncomeFragment : Fragment() {
         })
     }
 
+    private fun showAdHocIncomeOptionsDialog(adHocIncome: AdHocIncomeItem) {
+        val options = arrayOf("Edit", "Delete")
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Select an option")
+        builder.setItems(options) { dialog, which ->
+            when (which) {
+                0 -> showEditAdHocIncomeDialog(adHocIncome)
+                1 -> confirmDeleteAdHocIncome(adHocIncome)
+            }
+        }
+        builder.show()
+    }
+
+    private fun showEditAdHocIncomeDialog(adHocIncome: AdHocIncomeItem) {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Edit Ad Hoc Income")
+
+        val dialogView = layoutInflater.inflate(R.layout.edit_ad_hoc_income_dialog, null)
+        val titleInput: EditText = dialogView.findViewById(R.id.titleInput)
+        val amountInput: EditText = dialogView.findViewById(R.id.amountInput)
+        val dateInput: EditText = dialogView.findViewById(R.id.dateInput)
+        val notesInput: EditText = dialogView.findViewById(R.id.notesInput)
+
+        titleInput.setText(adHocIncome.title)
+        amountInput.setText(adHocIncome.amount.toString())
+        dateInput.setText(adHocIncome.date)
+        notesInput.setText(adHocIncome.notes)
+
+        builder.setView(dialogView)
+
+        builder.setPositiveButton("Update") { dialog, _ ->
+            val updatedTitle = titleInput.text.toString()
+            val updatedAmount = amountInput.text.toString().toDoubleOrNull() ?: 0.0
+            val updatedDate = dateInput.text.toString()
+            val updatedNotes = notesInput.text.toString()
+
+            updateAdHocIncome(adHocIncome, updatedTitle, updatedAmount, updatedDate, updatedNotes)
+        }
+
+        builder.setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
+
+        builder.show()
+    }
+
+    private fun confirmDeleteAdHocIncome(adHocIncome: AdHocIncomeItem) {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Confirm Deletion")
+        builder.setMessage("Are you sure you want to delete this ad hoc income?")
+        builder.setPositiveButton("Delete") { _, _ ->
+            deleteAdHocIncome(adHocIncome)
+        }
+        builder.setNegativeButton("Cancel", null)
+        builder.show()
+    }
+
+    private fun updateAdHocIncome(
+        adHocIncome: AdHocIncomeItem,
+        title: String,
+        amount: Double,
+        date: String,
+        notes: String?
+    ) {
+        val currentUser = auth.currentUser ?: return
+        val monthFormat = SimpleDateFormat("yyyy-MM", Locale.getDefault())
+        val month = monthFormat.format(
+            SimpleDateFormat("MMM dd, yyyy", Locale.getDefault()).parse(date) ?: Date()
+        )
+
+        val userAdHocIncomeRef =
+            database.child("users/${currentUser.uid}/adHocIncome/$month/${adHocIncome.key}")
+
+        val updatedAdHocIncome = AdHocIncomeItem(title, amount, date, notes ?: "")
+        userAdHocIncomeRef.setValue(updatedAdHocIncome).addOnCompleteListener {
+            if (it.isSuccessful) {
+                selectedMonthForEditing?.let {
+                    loadIncomeData(it)
+                }
+                Toast.makeText(requireContext(), "Ad Hoc Income updated", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "Failed to update Ad Hoc Income: ${it.exception?.message}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+    }
+
+    private fun deleteAdHocIncome(adHocIncome: AdHocIncomeItem) {
+        val currentUser = auth.currentUser ?: return
+        val monthFormat = SimpleDateFormat("yyyy-MM", Locale.getDefault())
+        val month = monthFormat.format(
+            SimpleDateFormat("MMM dd, yyyy", Locale.getDefault()).parse(adHocIncome.date) ?: Date()
+        )
+
+        val userAdHocIncomeRef =
+            database.child("users/${currentUser.uid}/adHocIncome/$month/${adHocIncome.key}")
+
+        userAdHocIncomeRef.removeValue().addOnCompleteListener {
+            if (it.isSuccessful) {
+                selectedMonthForEditing?.let {
+                    loadIncomeData(it)
+                }
+                Toast.makeText(requireContext(), "Ad Hoc Income deleted", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "Failed to delete Ad Hoc Income: ${it.exception?.message}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+    }
 
     private fun showAllBasicIncomeDialog() {
         val items = basicIncomeTotals.map { (month, amount) ->
@@ -235,10 +333,20 @@ class IncomeFragment : Fragment() {
         val userBasicIncomeMonthRef = database.child("users/${currentUser.uid}/basicIncome/$month")
         userBasicIncomeMonthRef.removeValue().addOnCompleteListener {
             if (it.isSuccessful) {
-                Toast.makeText(requireContext(), "Deleted basic income for $month", Toast.LENGTH_SHORT).show()
-                loadIncomeData()  // Refresh data
+                selectedMonthForEditing?.let {
+                    loadIncomeData(it)
+                }
+                Toast.makeText(
+                    requireContext(),
+                    "Deleted basic income for $month",
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
-                Toast.makeText(requireContext(), "Failed to delete basic income: ${it.exception?.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Failed to delete basic income: ${it.exception?.message}",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
     }
@@ -247,14 +355,12 @@ class IncomeFragment : Fragment() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Add Basic Income")
 
-        // Custom view for the dialog
         val dialogView = layoutInflater.inflate(R.layout.add_income_dialog, null)
         val yearPicker: NumberPicker = dialogView.findViewById(R.id.yearPicker)
         val monthPicker: NumberPicker = dialogView.findViewById(R.id.monthPicker)
         val amountInput: EditText = dialogView.findViewById(R.id.amountInput)
         amountInput.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
 
-        // Set up year and month pickers
         val currentYear = Calendar.getInstance().get(Calendar.YEAR)
         yearPicker.minValue = currentYear - 10
         yearPicker.maxValue = currentYear + 10
@@ -267,7 +373,6 @@ class IncomeFragment : Fragment() {
 
         builder.setView(dialogView)
 
-        // Define dialog actions
         builder.setPositiveButton("Add") { dialog, _ ->
             val year = yearPicker.value
             val month = months[monthPicker.value]
@@ -288,16 +393,22 @@ class IncomeFragment : Fragment() {
 
     private fun addBasicIncome(monthYear: String, amount: Float) {
         val currentUser = auth.currentUser ?: return
-        val userBasicIncomeMonthRef = database.child("users/${currentUser.uid}/basicIncome/$monthYear")
+        val userBasicIncomeMonthRef =
+            database.child("users/${currentUser.uid}/basicIncome/$monthYear")
 
         userBasicIncomeMonthRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (!snapshot.exists()) {
-                    // No entry exists, can add new
                     userBasicIncomeMonthRef.push().setValue(mapOf("amount" to amount))
-                    loadIncomeData()  // Refresh data
+                    selectedMonthForEditing?.let {
+                        loadIncomeData(it)
+                    }
                 } else {
-                    Toast.makeText(requireContext(), "Income already added for $monthYear", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Income already added for $monthYear",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
 
@@ -307,62 +418,46 @@ class IncomeFragment : Fragment() {
         })
     }
 
-    private fun addItemsToAllAdHocIncomeList(items: List<AdHocIncomeItem>) {
-        allAdHocIncomeList.addAll(items)
-    }
     private fun populateMonthlyIncomeChart(monthlyIncome: Map<String, Float>) {
-        val currentMonth = SimpleDateFormat("yyyy-MM", Locale.getDefault()).format(Calendar.getInstance().time)
+        val currentMonth =
+            SimpleDateFormat("yyyy-MM", Locale.getDefault()).format(Calendar.getInstance().time)
         val currentMonthIncome = monthlyIncome[currentMonth] ?: 0f
 
-        // Extract and sort the latest four months
         val latestMonths = monthlyIncome.keys.sortedDescending().take(4).reversed()
         val entries = latestMonths.mapIndexed { index, month ->
             BarEntry(index.toFloat(), monthlyIncome[month] ?: 0f)
         }
 
-        // Create the bar data set
         val barDataSet = BarDataSet(entries, "Monthly Income")
-        barDataSet.setDrawValues(true) // Display the values on top of each bar
-        barDataSet.valueTextColor = Color.WHITE // Set bar value text color to white
+        barDataSet.setDrawValues(true)
+        barDataSet.valueTextColor = Color.WHITE
         val barData = BarData(barDataSet)
-
-        // Adjust the bar width for slimmer bars
         barData.barWidth = 0.4f
 
-        // Set up the monthly income chart
         monthlyIncomeChart.apply {
             data = barData
-
-            // X-Axis customization
             xAxis.apply {
-                position = XAxis.XAxisPosition.BOTTOM // Place the labels at the bottom
-                granularity = 1f // Ensure labels appear for each bar
-                valueFormatter = IndexAxisValueFormatter(latestMonths) // Label format based on months
-                textSize = 12f // Customize the text size for better readability
-                textColor = Color.WHITE // Set the text color to white
-                setDrawGridLines(false) // Optional: Hide grid lines on the x-axis
-                labelRotationAngle = 0f // Display the labels horizontally
+                position = XAxis.XAxisPosition.BOTTOM
+                granularity = 1f
+                valueFormatter = IndexAxisValueFormatter(latestMonths)
+                textSize = 12f
+                textColor = Color.WHITE
+                setDrawGridLines(false)
+                labelRotationAngle = 0f
             }
-
-            // Y-Axis customization (left side)
             axisLeft.apply {
-                textSize = 12f // Customize the text size for better readability
-                textColor = Color.WHITE // Set the text color to white
-                setDrawGridLines(true) // Optional: Show grid lines for the y-axis
-                granularity = 1f // Increment in whole numbers
-                axisMinimum = 0f // Ensure bars start above the x-axis
+                textSize = 12f
+                textColor = Color.WHITE
+                setDrawGridLines(true)
+                granularity = 1f
+                axisMinimum = 0f
             }
-
             description = Description().apply {
-                text = "" // Clear description
+                text = ""
             }
-
-            // Disable the right axis (optional)
             axisRight.isEnabled = false
-
-            setExtraTopOffset(30f) // Add some space at the top for the title
-
-            legend.isEnabled = false // Optional: Hide the legend for a cleaner look
+            setExtraTopOffset(30f)
+            legend.isEnabled = false
 
             setOnChartValueSelectedListener(object : OnChartValueSelectedListener {
                 override fun onValueSelected(e: Entry?, h: Highlight?) {
@@ -378,55 +473,45 @@ class IncomeFragment : Fragment() {
 
                 override fun onNothingSelected() {
                     Log.d("ChartSelection", "No selection")
+                    adapter.updateData(mutableListOf())  // Clear the list if no bar is selected
                 }
             })
 
-            // Refresh the chart to show updated data and customization
             invalidate()
             incomeViewModel.updateCurrentMonthIncome(currentMonthIncome)
         }
     }
 
     private fun showEditBasicIncomeDialog(month: String) {
-        // Retrieve the current basic income amount for the selected month
         val currentAmount = basicIncomeTotals[month] ?: 0f
 
-        // Build the edit dialog
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Edit Basic Income for $month")
 
-        // Set up an EditText for input
         val input = EditText(requireContext()).apply {
             inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
             setText(currentAmount.toString())
         }
         builder.setView(input)
 
-        // Define dialog actions
         builder.setPositiveButton("Update") { dialog, _ ->
-            // Retrieve the new value
             val newAmount = input.text.toString().toFloatOrNull()
             if (newAmount != null) {
-                // Update Firebase with the appropriate identifier
                 val currentUser = auth.currentUser ?: return@setPositiveButton
                 val userBasicIncomeMonthRef =
                     database.child("users/${currentUser.uid}/basicIncome/$month")
 
-                // Query the unique ID under the month path to update it
                 userBasicIncomeMonthRef.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
-                        // Assume only one entry per month (modify if there are multiple)
                         val child = snapshot.children.firstOrNull()
                         if (child != null) {
-                            // Update the existing record
                             child.ref.child("amount").setValue(newAmount).addOnCompleteListener {
                                 if (it.isSuccessful) {
-                                    // Update local data
                                     basicIncomeTotals[month] = newAmount
-                                    // Refresh the displayed value in the TextView
                                     basicIncomeTextView.text = "RM$newAmount"
-                                    // Refresh the data and update the chart
-                                    loadIncomeData()
+                                    selectedMonthForEditing?.let {
+                                        loadIncomeData(it)
+                                    }
                                 } else {
                                     Log.e(
                                         "IncomeFragment",
@@ -454,36 +539,15 @@ class IncomeFragment : Fragment() {
         builder.show()
     }
 
-    // Function to filter ad hoc income for a specific month
     private fun filterAdHocIncomeForMonth(month: String) {
-        // Start by filtering from the master list, which remains unchanged
         val filteredList = allAdHocIncomeList.filter {
             extractYearMonthFromDate(it.date) == month
         }
-        // Update the RecyclerView adapter with the newly filtered list
         adapter.updateData(filteredList)
     }
 
-    private fun showAdHocIncomeDetailsDialog(adHocIncome: AdHocIncomeItem) {
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Ad Hoc Income Details")
-
-        val message = """
-        Title: ${adHocIncome.title}
-        Amount: RM${adHocIncome.amount}
-        Date: ${adHocIncome.date}
-        Notes: ${adHocIncome.notes ?: "No additional notes"}
-    """.trimIndent()
-
-        builder.setMessage(message)
-        builder.setPositiveButton("Close") { dialog, _ -> dialog.dismiss() }
-        builder.show()
-    }
-
-    // Function to extract the "yyyy-MM" portion from a given date string
     private fun extractYearMonthFromDate(date: String?): String {
         if (date == null) return "Unknown"
-        // Assume the date is in a format like "MMM dd, yyyy"
         val inputFormat = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
         val outputFormat = SimpleDateFormat("yyyy-MM", Locale.getDefault())
 
@@ -497,5 +561,4 @@ class IncomeFragment : Fragment() {
             "Unknown"
         }
     }
-
 }
