@@ -36,7 +36,7 @@ class ExpensesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (requireActivity() as MainActivity).toggleHeaderSyncBtnVisibility(true)
+        (requireActivity() as MainActivity).toggleHeaderSyncBtnVisibility(false)
 
         // Prefetch category images
         context?.let { context ->

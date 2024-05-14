@@ -21,6 +21,7 @@ import com.example.expenses_and_budget_mobileassignment.util.getFirebaseHelperIn
 import com.google.firebase.auth.FirebaseAuth
 import my.edu.tarc.debtdecoder.R
 import my.edu.tarc.debtdecoder.databinding.FragmentAddExpenseBinding
+import my.edu.tarc.debtdecoderApp.MainActivity
 import java.util.Calendar
 
 // interface for update add expense UI when an expense category is selected in ExpenseCategoryPicker
@@ -53,6 +54,7 @@ class AddExpenseFragment : Fragment(), CategorySelectionListener {
         super.onViewCreated(view, savedInstanceState)
 
         if(isAdded) {
+            (requireActivity() as MainActivity).toggleHeaderSyncBtnVisibility(true)
 
             binding.cardExpenseCategory.setOnClickListener {
                 showCategoryPicker()
