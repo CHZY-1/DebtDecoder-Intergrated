@@ -11,7 +11,7 @@ Scenario : Debt Decoder: An app providing personalized finance management tools,
 - Kotlin
 - Firebase
 - Android Studio
-- 
+  
 </details>
 
 <details>
