@@ -19,9 +19,9 @@ Scenario : Debt Decoder: An app providing personalized finance management tools,
 <summary>Modules</summary>
 
 - Login/Register/Forget Password
-- Track Incomes
-- Manage Expenses
-- Manage Debts
+- Track Income
+- Manage Expense
+- Manage Debt
 - Education Resources
 
 </details>
