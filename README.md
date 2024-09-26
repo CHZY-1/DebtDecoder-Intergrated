@@ -1,8 +1,6 @@
-# DebtDecoder-Intergrate
+# DebtDecoder
 
-## About The Project
-
-Scenario : Debt Decoder: An app providing personalized finance management tools, debt repayment strategies, and budgeting tips for post-graduation planning.
+A personalized finance management app.
 
 <details>
 
