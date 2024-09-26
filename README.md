@@ -29,8 +29,12 @@ Scenario : Debt Decoder: An app providing personalized finance management tools,
 
 </details>
 
+<details>
+
 <summary>Presentation</summary>
 
 ![Login and SignUP](https://github.com/user-attachments/assets/7ece9e37-df21-442e-9308-7019d635607d)
 ![Forget Password and My Account](https://github.com/user-attachments/assets/3a59d9cd-635e-4a50-aa57-ad9f4d6076da)
+
+</details>
 
